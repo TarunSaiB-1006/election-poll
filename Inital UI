@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>School Election Ballot</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .ballot-list {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .candidate-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      padding: 10px 0;
+      cursor: pointer;
+    }
+
+    .candidate-item:hover {
+      background: #f0f8ff;
+    }
+
+    .candidate-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-placeholder {
+      width: 40px;
+      height: 40px;
+      background: #ddd;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    .candidate-name {
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .candidate-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    button {
+      margin: 2rem auto 0 auto;
+      display: block;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Vote for Head Boy</h2>
+
+  <div class="ballot-list" data-position="headboy">
+    <!-- Repeat for 15 candidates -->
+    <label class="candidate-item">
+      <div class="candidate-info">
+        <div class="logo-placeholder"></div>
+        <span class="candidate-name">Candidate 1</span>
+      </div>
+      <input type="checkbox" name="headboy" value="Candidate 1">
+    </label>
+
+    <label class="candidate-item">
+      <div class="candidate-info">
+        <div class="logo-placeholder"></div>
+        <span class="candidate-name">Candidate 2</span>
+      </div>
+      <input type="checkbox" name="headboy" value="Candidate 2">
+    </label>
+
+    <label class="candidate-item">
+      <div class="candidate-info">
+        <div class="logo-placeholder"></div>
+        <span class="candidate-name">Candidate 3</span>
+      </div>
+      <input type="checkbox" name="headboy" value="Candidate 3">
+    </label>
+
+    <!-- Add candidates 4 to 15 below -->
+    <!-- You can generate these easily with JS or by copy-pasting -->
+
+    <!-- Sample dynamic continuation -->
+    <script>
+      const container = document.querySelector(".ballot-list");
+      for (let i = 4; i <= 15; i++) {
+        const label = document.createElement("label");
+        label.className = "candidate-item";
+        label.innerHTML = `
+          <div class="candidate-info">
+            <div class="logo-placeholder"></div>
+            <span class="candidate-name">Candidate ${i}</span>
+          </div>
+          <input type="checkbox" name="headboy" value="Candidate ${i}">
+        `;
+        container.appendChild(label);
+      }
+    </script>
+  </div>
+
+  <button onclick="submitVote()">Submit Vote</button>
+
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="headboy"]');
+
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          checkboxes.forEach(cb => {
+            if (cb !== checkbox) cb.checked = false;
+          });
+        }
+      });
+    });
+
+    function submitVote() {
+      const checked = document.querySelector('input[type="checkbox"][name="headboy"]:checked');
+      const vote = checked ? checked.value : 'No selection';
+      alert("You voted for:\n" + vote);
+    }
+  </script>
+
+</body>
+</html>
