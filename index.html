@@ -109,6 +109,12 @@
         background: #f9f9f9;
       }
 
+      .voting-controls {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
       .selection-button {
         width: 40px;
         height: 25px;
@@ -116,9 +122,8 @@
         border: none;
         border-radius: 20px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
-        position: relative;
         flex-shrink: 0;
       }
 
@@ -127,19 +132,24 @@
         box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
       }
 
-      .selection-button.selected {
-        background: #dc3545;
-        border-radius: 50%;
+      .indicator-light {
         width: 30px;
         height: 30px;
+        background: #ddd;
+        border: 2px solid #999;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+        position: relative;
+      }
+
+      .candidate-option.selected .indicator-light {
+        background: #dc3545;
+        border-color: #dc3545;
         box-shadow:
           0 0 20px rgba(220, 53, 69, 0.6),
           inset 0 0 10px rgba(255, 255, 255, 0.2);
         animation: ledPulse 2s infinite;
-      }
-
-      .selection-button.selected:hover {
-        transform: scale(1.1);
       }
 
       @keyframes ledPulse {
@@ -157,7 +167,7 @@
       }
 
       /* Add a subtle inner highlight for LED effect */
-      .selection-button.selected::before {
+      .candidate-option.selected .indicator-light::before {
         content: "";
         position: absolute;
         top: 20%;
@@ -230,7 +240,22 @@
 
         .candidate-option {
           padding: 12px;
-          gap: 12px;
+          gap: 10px;
+        }
+
+        .voting-controls {
+          gap: 8px;
+        }
+
+        .selection-button {
+          width: 35px;
+          height: 22px;
+          border-radius: 18px;
+        }
+
+        .indicator-light {
+          width: 25px;
+          height: 25px;
         }
 
         .candidate-logo {
@@ -241,17 +266,6 @@
 
         .candidate-name {
           font-size: 16px;
-        }
-
-        .selection-button {
-          width: 35px;
-          height: 22px;
-          border-radius: 18px;
-        }
-
-        .selection-button.selected {
-          width: 28px;
-          height: 28px;
         }
       }
     </style>
@@ -269,9 +283,9 @@
       <div class="instructions-section">
         <h2 class="instructions-title">INSTRUCTIONS</h2>
         <p class="instructions-text">
-          Click the selection button next to your preferred candidate. The blue
-          oval button will turn into a red LED light to confirm your selection.
-          You may only vote for one candidate.
+          Click the selection button next to your preferred candidate. The
+          indicator light will turn red to confirm your selection. You may only
+          vote for one candidate.
         </p>
       </div>
 
@@ -284,25 +298,37 @@
 
         <div class="candidates-container">
           <div class="candidate-option" data-candidate="sj">
-            <button class="selection-button" type="button"></button>
+            <div class="voting-controls">
+              <button class="selection-button" type="button"></button>
+              <div class="indicator-light"></div>
+            </div>
             <div class="candidate-logo">SJ</div>
             <div class="candidate-name">Sarah Johnson</div>
           </div>
 
           <div class="candidate-option" data-candidate="mc">
-            <button class="selection-button" type="button"></button>
+            <div class="voting-controls">
+              <button class="selection-button" type="button"></button>
+              <div class="indicator-light"></div>
+            </div>
             <div class="candidate-logo">MC</div>
             <div class="candidate-name">Michael Chen</div>
           </div>
 
           <div class="candidate-option" data-candidate="er">
-            <button class="selection-button" type="button"></button>
+            <div class="voting-controls">
+              <button class="selection-button" type="button"></button>
+              <div class="indicator-light"></div>
+            </div>
             <div class="candidate-logo">ER</div>
             <div class="candidate-name">Elena Rodriguez</div>
           </div>
 
           <div class="candidate-option" data-candidate="dt">
-            <button class="selection-button" type="button"></button>
+            <div class="voting-controls">
+              <button class="selection-button" type="button"></button>
+              <div class="indicator-light"></div>
+            </div>
             <div class="candidate-logo">DT</div>
             <div class="candidate-name">David Thompson</div>
           </div>
@@ -340,13 +366,12 @@
 
       function selectCandidate(candidateId, optionElement) {
         // Remove selection from all candidates
-        document.querySelectorAll(".selection-button").forEach((button) => {
-          button.classList.remove("selected");
+        document.querySelectorAll(".candidate-option").forEach((option) => {
+          option.classList.remove("selected");
         });
 
         // Add selection to clicked candidate
-        const button = optionElement.querySelector(".selection-button");
-        button.classList.add("selected");
+        optionElement.classList.add("selected");
 
         // Update selected candidate
         selectedCandidate = candidateId;
@@ -396,9 +421,9 @@
         const options = Array.from(
           document.querySelectorAll(".candidate-option"),
         );
-        const currentSelected = document
-          .querySelector(".selection-button.selected")
-          ?.closest(".candidate-option");
+        const currentSelected = document.querySelector(
+          ".candidate-option.selected",
+        );
         let currentIndex = currentSelected
           ? options.indexOf(currentSelected)
           : -1;
@@ -440,7 +465,7 @@
       // Update aria-checked when selection changes
       function updateAriaChecked() {
         document.querySelectorAll(".candidate-option").forEach((option) => {
-          const isSelected = option.querySelector(".selection-button.selected");
+          const isSelected = option.classList.contains("selected");
           option.setAttribute("aria-checked", isSelected ? "true" : "false");
         });
       }
