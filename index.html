@@ -73,39 +73,64 @@
         font-weight: 500;
       }
 
-      .selection-box {
+      .selection-button {
         width: 60px;
-        height: 60px;
-        border: 3px solid #ddd;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        height: 40px;
+        background: #007bff;
+        border: none;
+        border-radius: 20px;
         cursor: pointer;
         transition: all 0.3s ease;
-        background: white;
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        position: relative;
+        overflow: hidden;
       }
 
-      .selection-box:hover {
-        border-color: #007bff;
+      .selection-button:hover {
         transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
       }
 
-      .selection-box.selected {
-        background: #28a745;
-        border-color: #28a745;
-        color: white;
+      .selection-button.selected {
+        background: #dc3545;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        box-shadow:
+          0 0 20px rgba(220, 53, 69, 0.6),
+          inset 0 0 10px rgba(255, 255, 255, 0.2);
+        animation: ledPulse 2s infinite;
       }
 
-      .checkmark {
-        font-size: 2rem;
-        font-weight: bold;
-        opacity: 0;
-        transition: opacity 0.2s ease;
+      .selection-button.selected:hover {
+        transform: scale(1.1);
       }
 
-      .selection-box.selected .checkmark {
-        opacity: 1;
+      @keyframes ledPulse {
+        0%,
+        100% {
+          box-shadow:
+            0 0 20px rgba(220, 53, 69, 0.6),
+            inset 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        50% {
+          box-shadow:
+            0 0 30px rgba(220, 53, 69, 0.8),
+            inset 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      /* Add a subtle inner highlight for LED effect */
+      .selection-button.selected::before {
+        content: "";
+        position: absolute;
+        top: 15%;
+        left: 20%;
+        width: 30%;
+        height: 30%;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        filter: blur(2px);
       }
 
       .submit-button {
@@ -149,13 +174,15 @@
           height: 40px;
         }
 
-        .selection-box {
+        .selection-button {
           width: 50px;
-          height: 50px;
+          height: 35px;
+          border-radius: 17px;
         }
 
-        .checkmark {
-          font-size: 1.5rem;
+        .selection-button.selected {
+          width: 45px;
+          height: 45px;
         }
       }
     </style>
@@ -169,9 +196,7 @@
           <div class="candidate-logo">A</div>
           <span class="candidate-name">Alex Johnson</span>
         </div>
-        <div class="selection-box">
-          <span class="checkmark">✓</span>
-        </div>
+        <button class="selection-button" type="button"></button>
       </div>
 
       <div class="candidate-row" data-candidate="2">
@@ -179,9 +204,7 @@
           <div class="candidate-logo">B</div>
           <span class="candidate-name">Blake Martinez</span>
         </div>
-        <div class="selection-box">
-          <span class="checkmark">✓</span>
-        </div>
+        <button class="selection-button" type="button"></button>
       </div>
 
       <div class="candidate-row" data-candidate="3">
@@ -189,9 +212,7 @@
           <div class="candidate-logo">C</div>
           <span class="candidate-name">Cameron Davis</span>
         </div>
-        <div class="selection-box">
-          <span class="checkmark">✓</span>
-        </div>
+        <button class="selection-button" type="button"></button>
       </div>
 
       <div class="candidate-row" data-candidate="4">
@@ -199,9 +220,7 @@
           <div class="candidate-logo">D</div>
           <span class="candidate-name">Dylan Thompson</span>
         </div>
-        <div class="selection-box">
-          <span class="checkmark">✓</span>
-        </div>
+        <button class="selection-button" type="button"></button>
       </div>
 
       <div class="candidate-row" data-candidate="5">
@@ -209,9 +228,7 @@
           <div class="candidate-logo">E</div>
           <span class="candidate-name">Ethan Wilson</span>
         </div>
-        <div class="selection-box">
-          <span class="checkmark">✓</span>
-        </div>
+        <button class="selection-button" type="button"></button>
       </div>
 
       <div class="candidate-row" data-candidate="6">
@@ -219,9 +236,7 @@
           <div class="candidate-logo">F</div>
           <span class="candidate-name">Felix Rodriguez</span>
         </div>
-        <div class="selection-box">
-          <span class="checkmark">✓</span>
-        </div>
+        <button class="selection-button" type="button"></button>
       </div>
 
       <div class="candidate-row" data-candidate="7">
@@ -229,9 +244,7 @@
           <div class="candidate-logo">G</div>
           <span class="candidate-name">Gabriel Lee</span>
         </div>
-        <div class="selection-box">
-          <span class="checkmark">✓</span>
-        </div>
+        <button class="selection-button" type="button"></button>
       </div>
 
       <div class="candidate-row" data-candidate="8">
@@ -239,9 +252,7 @@
           <div class="candidate-logo">H</div>
           <span class="candidate-name">Henry Anderson</span>
         </div>
-        <div class="selection-box">
-          <span class="checkmark">✓</span>
-        </div>
+        <button class="selection-button" type="button"></button>
       </div>
     </div>
 
@@ -258,15 +269,25 @@
         });
       });
 
+      // Add click listeners to selection buttons to prevent event bubbling
+      document.querySelectorAll(".selection-button").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const row = button.closest(".candidate-row");
+          const candidateId = row.dataset.candidate;
+          selectCandidate(candidateId, row);
+        });
+      });
+
       function selectCandidate(candidateId, rowElement) {
         // Remove selection from all candidates
-        document.querySelectorAll(".selection-box").forEach((box) => {
-          box.classList.remove("selected");
+        document.querySelectorAll(".selection-button").forEach((button) => {
+          button.classList.remove("selected");
         });
 
         // Add selection to clicked candidate
-        const selectionBox = rowElement.querySelector(".selection-box");
-        selectionBox.classList.add("selected");
+        const selectionButton = rowElement.querySelector(".selection-button");
+        selectionButton.classList.add("selected");
 
         // Update selected candidate
         selectedCandidate = candidateId;
@@ -315,7 +336,7 @@
       document.addEventListener("keydown", (e) => {
         const rows = Array.from(document.querySelectorAll(".candidate-row"));
         const currentSelected = document
-          .querySelector(".selection-box.selected")
+          .querySelector(".selection-button.selected")
           ?.closest(".candidate-row");
         let currentIndex = currentSelected ? rows.indexOf(currentSelected) : -1;
 
