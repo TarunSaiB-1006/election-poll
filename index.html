@@ -109,32 +109,64 @@
         background: #f9f9f9;
       }
 
-      .selection-checkbox {
+      .selection-button {
+        width: 40px;
+        height: 25px;
+        background: #007bff;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .selection-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+      }
+
+      .selection-button.selected {
+        background: #dc3545;
+        border-radius: 50%;
         width: 30px;
         height: 30px;
-        border: 3px solid #333;
-        background: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        cursor: pointer;
+        box-shadow:
+          0 0 20px rgba(220, 53, 69, 0.6),
+          inset 0 0 10px rgba(255, 255, 255, 0.2);
+        animation: ledPulse 2s infinite;
       }
 
-      .selection-checkbox.selected {
-        background: #28a745;
+      .selection-button.selected:hover {
+        transform: scale(1.1);
       }
 
-      .checkmark {
-        color: white;
-        font-size: 20px;
-        font-weight: bold;
-        opacity: 0;
-        transition: opacity 0.2s ease;
+      @keyframes ledPulse {
+        0%,
+        100% {
+          box-shadow:
+            0 0 20px rgba(220, 53, 69, 0.6),
+            inset 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        50% {
+          box-shadow:
+            0 0 30px rgba(220, 53, 69, 0.8),
+            inset 0 0 15px rgba(255, 255, 255, 0.3);
+        }
       }
 
-      .selection-checkbox.selected .checkmark {
-        opacity: 1;
+      /* Add a subtle inner highlight for LED effect */
+      .selection-button.selected::before {
+        content: "";
+        position: absolute;
+        top: 20%;
+        left: 25%;
+        width: 25%;
+        height: 25%;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        filter: blur(1px);
       }
 
       .candidate-logo {
@@ -210,6 +242,17 @@
         .candidate-name {
           font-size: 16px;
         }
+
+        .selection-button {
+          width: 35px;
+          height: 22px;
+          border-radius: 18px;
+        }
+
+        .selection-button.selected {
+          width: 28px;
+          height: 28px;
+        }
       }
     </style>
   </head>
@@ -226,9 +269,9 @@
       <div class="instructions-section">
         <h2 class="instructions-title">INSTRUCTIONS</h2>
         <p class="instructions-text">
-          Click the selection box next to your preferred candidate. A green
-          checkmark will appear to confirm your selection. You may only vote for
-          one candidate.
+          Click the selection button next to your preferred candidate. The blue
+          oval button will turn into a red LED light to confirm your selection.
+          You may only vote for one candidate.
         </p>
       </div>
 
@@ -241,33 +284,25 @@
 
         <div class="candidates-container">
           <div class="candidate-option" data-candidate="sj">
-            <div class="selection-checkbox">
-              <span class="checkmark">✓</span>
-            </div>
+            <button class="selection-button" type="button"></button>
             <div class="candidate-logo">SJ</div>
             <div class="candidate-name">Sarah Johnson</div>
           </div>
 
           <div class="candidate-option" data-candidate="mc">
-            <div class="selection-checkbox">
-              <span class="checkmark">✓</span>
-            </div>
+            <button class="selection-button" type="button"></button>
             <div class="candidate-logo">MC</div>
             <div class="candidate-name">Michael Chen</div>
           </div>
 
           <div class="candidate-option" data-candidate="er">
-            <div class="selection-checkbox">
-              <span class="checkmark">✓</span>
-            </div>
+            <button class="selection-button" type="button"></button>
             <div class="candidate-logo">ER</div>
             <div class="candidate-name">Elena Rodriguez</div>
           </div>
 
           <div class="candidate-option" data-candidate="dt">
-            <div class="selection-checkbox">
-              <span class="checkmark">✓</span>
-            </div>
+            <button class="selection-button" type="button"></button>
             <div class="candidate-logo">DT</div>
             <div class="candidate-name">David Thompson</div>
           </div>
@@ -293,15 +328,25 @@
         });
       });
 
+      // Add click listeners to selection buttons to prevent event bubbling
+      document.querySelectorAll(".selection-button").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const option = button.closest(".candidate-option");
+          const candidateId = option.dataset.candidate;
+          selectCandidate(candidateId, option);
+        });
+      });
+
       function selectCandidate(candidateId, optionElement) {
         // Remove selection from all candidates
-        document.querySelectorAll(".selection-checkbox").forEach((checkbox) => {
-          checkbox.classList.remove("selected");
+        document.querySelectorAll(".selection-button").forEach((button) => {
+          button.classList.remove("selected");
         });
 
         // Add selection to clicked candidate
-        const checkbox = optionElement.querySelector(".selection-checkbox");
-        checkbox.classList.add("selected");
+        const button = optionElement.querySelector(".selection-button");
+        button.classList.add("selected");
 
         // Update selected candidate
         selectedCandidate = candidateId;
@@ -352,7 +397,7 @@
           document.querySelectorAll(".candidate-option"),
         );
         const currentSelected = document
-          .querySelector(".selection-checkbox.selected")
+          .querySelector(".selection-button.selected")
           ?.closest(".candidate-option");
         let currentIndex = currentSelected
           ? options.indexOf(currentSelected)
@@ -395,9 +440,7 @@
       // Update aria-checked when selection changes
       function updateAriaChecked() {
         document.querySelectorAll(".candidate-option").forEach((option) => {
-          const isSelected = option.querySelector(
-            ".selection-checkbox.selected",
-          );
+          const isSelected = option.querySelector(".selection-button.selected");
           option.setAttribute("aria-checked", isSelected ? "true" : "false");
         });
       }
