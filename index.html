@@ -9,151 +9,334 @@
         font-family: "Segoe UI", sans-serif;
         background: #f5f7fa;
         padding: 2rem;
+        margin: 0;
       }
 
-      h2 {
+      .ballot-title {
         text-align: center;
         margin-bottom: 2rem;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #333;
       }
 
-      .ballot-list {
-        max-width: 600px;
+      .ballot-container {
+        max-width: 700px;
         margin: 0 auto;
         background: white;
-        padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
       }
 
-      .candidate-item {
+      .candidate-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid #eee;
-        padding: 10px 0;
+        padding: 1rem 0;
         cursor: pointer;
+        transition: background-color 0.2s ease;
       }
 
-      .candidate-item:hover {
-        background: #f0f8ff;
+      .candidate-row:hover {
+        background: #f8f9fa;
+      }
+
+      .candidate-row:last-child {
+        border-bottom: none;
       }
 
       .candidate-info {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 1.2rem;
+        flex: 1;
       }
 
-      .logo-placeholder {
-        width: 40px;
-        height: 40px;
+      .candidate-logo {
+        width: 50px;
+        height: 50px;
         background: #ddd;
-        border-radius: 5px;
-        display: inline-block;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #666;
       }
 
       .candidate-name {
-        font-size: 1rem;
+        font-size: 1.1rem;
         color: #333;
+        font-weight: 500;
       }
 
-      .candidate-item input[type="checkbox"] {
-        width: 18px;
-        height: 18px;
+      .selection-box {
+        width: 60px;
+        height: 60px;
+        border: 3px solid #ddd;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
+        transition: all 0.3s ease;
+        background: white;
       }
 
-      button {
-        margin: 2rem auto 0 auto;
+      .selection-box:hover {
+        border-color: #007bff;
+        transform: scale(1.05);
+      }
+
+      .selection-box.selected {
+        background: #28a745;
+        border-color: #28a745;
+        color: white;
+      }
+
+      .checkmark {
+        font-size: 2rem;
+        font-weight: bold;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .selection-box.selected .checkmark {
+        opacity: 1;
+      }
+
+      .submit-button {
+        margin: 2.5rem auto 0 auto;
         display: block;
-        padding: 0.75rem 2rem;
-        font-size: 1rem;
+        padding: 1rem 3rem;
+        font-size: 1.1rem;
         background: #007bff;
         color: white;
         border: none;
-        border-radius: 5px;
+        border-radius: 8px;
         cursor: pointer;
+        transition: background-color 0.2s ease;
+        font-weight: 600;
       }
 
-      button:hover {
+      .submit-button:hover {
         background: #0056b3;
+      }
+
+      .submit-button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 1rem;
+        }
+
+        .ballot-container {
+          padding: 1.5rem;
+        }
+
+        .candidate-info {
+          gap: 1rem;
+        }
+
+        .candidate-logo {
+          width: 40px;
+          height: 40px;
+        }
+
+        .selection-box {
+          width: 50px;
+          height: 50px;
+        }
+
+        .checkmark {
+          font-size: 1.5rem;
+        }
       }
     </style>
   </head>
   <body>
-    <h2>Vote for Head Boy</h2>
+    <h1 class="ballot-title">Vote for Head Boy</h1>
 
-    <div class="ballot-list" data-position="headboy">
-      <!-- Repeat for 15 candidates -->
-      <label class="candidate-item">
+    <div class="ballot-container">
+      <div class="candidate-row" data-candidate="1">
         <div class="candidate-info">
-          <div class="logo-placeholder"></div>
-          <span class="candidate-name">Candidate 1</span>
+          <div class="candidate-logo">A</div>
+          <span class="candidate-name">Alex Johnson</span>
         </div>
-        <input type="checkbox" name="headboy" value="Candidate 1" />
-      </label>
+        <div class="selection-box">
+          <span class="checkmark">✓</span>
+        </div>
+      </div>
 
-      <label class="candidate-item">
+      <div class="candidate-row" data-candidate="2">
         <div class="candidate-info">
-          <div class="logo-placeholder"></div>
-          <span class="candidate-name">Candidate 2</span>
+          <div class="candidate-logo">B</div>
+          <span class="candidate-name">Blake Martinez</span>
         </div>
-        <input type="checkbox" name="headboy" value="Candidate 2" />
-      </label>
+        <div class="selection-box">
+          <span class="checkmark">✓</span>
+        </div>
+      </div>
 
-      <label class="candidate-item">
+      <div class="candidate-row" data-candidate="3">
         <div class="candidate-info">
-          <div class="logo-placeholder"></div>
-          <span class="candidate-name">Candidate 3</span>
+          <div class="candidate-logo">C</div>
+          <span class="candidate-name">Cameron Davis</span>
         </div>
-        <input type="checkbox" name="headboy" value="Candidate 3" />
-      </label>
+        <div class="selection-box">
+          <span class="checkmark">✓</span>
+        </div>
+      </div>
 
-      <!-- Add candidates 4 to 15 below -->
-      <!-- You can generate these easily with JS or by copy-pasting -->
+      <div class="candidate-row" data-candidate="4">
+        <div class="candidate-info">
+          <div class="candidate-logo">D</div>
+          <span class="candidate-name">Dylan Thompson</span>
+        </div>
+        <div class="selection-box">
+          <span class="checkmark">✓</span>
+        </div>
+      </div>
 
-      <!-- Sample dynamic continuation -->
-      <script>
-        const container = document.querySelector(".ballot-list");
-        for (let i = 4; i <= 15; i++) {
-          const label = document.createElement("label");
-          label.className = "candidate-item";
-          label.innerHTML = `
-          <div class="candidate-info">
-            <div class="logo-placeholder"></div>
-            <span class="candidate-name">Candidate ${i}</span>
-          </div>
-          <input type="checkbox" name="headboy" value="Candidate ${i}">
-        `;
-          container.appendChild(label);
-        }
-      </script>
+      <div class="candidate-row" data-candidate="5">
+        <div class="candidate-info">
+          <div class="candidate-logo">E</div>
+          <span class="candidate-name">Ethan Wilson</span>
+        </div>
+        <div class="selection-box">
+          <span class="checkmark">✓</span>
+        </div>
+      </div>
+
+      <div class="candidate-row" data-candidate="6">
+        <div class="candidate-info">
+          <div class="candidate-logo">F</div>
+          <span class="candidate-name">Felix Rodriguez</span>
+        </div>
+        <div class="selection-box">
+          <span class="checkmark">✓</span>
+        </div>
+      </div>
+
+      <div class="candidate-row" data-candidate="7">
+        <div class="candidate-info">
+          <div class="candidate-logo">G</div>
+          <span class="candidate-name">Gabriel Lee</span>
+        </div>
+        <div class="selection-box">
+          <span class="checkmark">✓</span>
+        </div>
+      </div>
+
+      <div class="candidate-row" data-candidate="8">
+        <div class="candidate-info">
+          <div class="candidate-logo">H</div>
+          <span class="candidate-name">Henry Anderson</span>
+        </div>
+        <div class="selection-box">
+          <span class="checkmark">✓</span>
+        </div>
+      </div>
     </div>
 
-    <button onclick="submitVote()">Submit Vote</button>
+    <button class="submit-button" onclick="submitVote()">Submit Vote</button>
 
     <script>
-      const checkboxes = document.querySelectorAll(
-        'input[type="checkbox"][name="headboy"]',
-      );
+      let selectedCandidate = null;
 
-      checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener("change", () => {
-          if (checkbox.checked) {
-            checkboxes.forEach((cb) => {
-              if (cb !== checkbox) cb.checked = false;
-            });
-          }
+      // Add click listeners to all candidate rows
+      document.querySelectorAll(".candidate-row").forEach((row) => {
+        row.addEventListener("click", () => {
+          const candidateId = row.dataset.candidate;
+          selectCandidate(candidateId, row);
         });
       });
 
-      function submitVote() {
-        const checked = document.querySelector(
-          'input[type="checkbox"][name="headboy"]:checked',
-        );
-        const vote = checked ? checked.value : "No selection";
-        alert("You voted for:\n" + vote);
+      function selectCandidate(candidateId, rowElement) {
+        // Remove selection from all candidates
+        document.querySelectorAll(".selection-box").forEach((box) => {
+          box.classList.remove("selected");
+        });
+
+        // Add selection to clicked candidate
+        const selectionBox = rowElement.querySelector(".selection-box");
+        selectionBox.classList.add("selected");
+
+        // Update selected candidate
+        selectedCandidate = candidateId;
+
+        // Get candidate name for tracking
+        const candidateName =
+          rowElement.querySelector(".candidate-name").textContent;
+        console.log(`Selected: ${candidateName}`);
       }
+
+      function submitVote() {
+        if (!selectedCandidate) {
+          alert("Please select a candidate before submitting your vote.");
+          return;
+        }
+
+        const selectedRow = document.querySelector(
+          `[data-candidate="${selectedCandidate}"]`,
+        );
+        const candidateName =
+          selectedRow.querySelector(".candidate-name").textContent;
+
+        // Show confirmation
+        const confirmed = confirm(
+          `You are voting for: ${candidateName}\n\nAre you sure you want to submit this vote?`,
+        );
+
+        if (confirmed) {
+          alert(
+            `Vote submitted successfully!\n\nYou voted for: ${candidateName}`,
+          );
+
+          // Disable further voting
+          document.querySelectorAll(".candidate-row").forEach((row) => {
+            row.style.pointerEvents = "none";
+            row.style.opacity = "0.6";
+          });
+
+          document.querySelector(".submit-button").disabled = true;
+          document.querySelector(".submit-button").textContent =
+            "Vote Submitted";
+        }
+      }
+
+      // Add keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        const rows = Array.from(document.querySelectorAll(".candidate-row"));
+        const currentSelected = document
+          .querySelector(".selection-box.selected")
+          ?.closest(".candidate-row");
+        let currentIndex = currentSelected ? rows.indexOf(currentSelected) : -1;
+
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          currentIndex = (currentIndex + 1) % rows.length;
+          selectCandidate(
+            rows[currentIndex].dataset.candidate,
+            rows[currentIndex],
+          );
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          currentIndex = currentIndex <= 0 ? rows.length - 1 : currentIndex - 1;
+          selectCandidate(
+            rows[currentIndex].dataset.candidate,
+            rows[currentIndex],
+          );
+        } else if (e.key === "Enter" && selectedCandidate) {
+          submitVote();
+        }
+      });
     </script>
   </body>
 </html>
