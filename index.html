@@ -3,361 +3,411 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>School Election Ballot</title>
+    <title>Official Ballot - General Election 2024</title>
     <style>
       body {
-        font-family: "Segoe UI", sans-serif;
-        background: #f5f7fa;
-        padding: 2rem;
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
         margin: 0;
-      }
-
-      .ballot-title {
-        text-align: center;
-        margin-bottom: 2rem;
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #333;
+        padding: 20px;
       }
 
       .ballot-container {
-        max-width: 700px;
+        max-width: 800px;
         margin: 0 auto;
         background: white;
-        padding: 2rem;
-        border-radius: 12px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+        border: 2px solid #333;
       }
 
-      .candidate-row {
+      .ballot-header {
+        background: #1e4a72;
+        color: white;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .ballot-title {
+        font-size: 32px;
+        font-weight: bold;
+        margin: 0 0 8px 0;
+        letter-spacing: 2px;
+      }
+
+      .election-info {
+        font-size: 18px;
+        margin: 0 0 8px 0;
+        font-weight: normal;
+      }
+
+      .voting-instruction {
+        font-size: 14px;
+        margin: 0;
+        font-weight: normal;
+      }
+
+      .instructions-section {
+        background: #e8e8e8;
+        padding: 15px 20px;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .instructions-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 0 8px 0;
+        color: #333;
+      }
+
+      .instructions-text {
+        font-size: 14px;
+        color: #333;
+        margin: 0;
+        line-height: 1.4;
+      }
+
+      .race-section {
+        padding: 20px;
+      }
+
+      .race-header {
+        text-align: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #333;
+        padding-bottom: 10px;
+      }
+
+      .race-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0 0 5px 0;
+        color: #333;
+      }
+
+      .race-subtitle {
+        font-size: 14px;
+        color: #666;
+        margin: 0;
+      }
+
+      .candidates-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .candidate-option {
+        border: 2px solid #333;
+        padding: 15px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid #eee;
-        padding: 1rem 0;
+        gap: 15px;
         cursor: pointer;
         transition: background-color 0.2s ease;
       }
 
-      .candidate-row:hover {
-        background: #f8f9fa;
+      .candidate-option:hover {
+        background: #f9f9f9;
       }
 
-      .candidate-row:last-child {
-        border-bottom: none;
-      }
-
-      .candidate-info {
-        display: flex;
-        align-items: center;
-        gap: 1.2rem;
-        flex: 1;
-      }
-
-      .candidate-logo {
-        width: 50px;
-        height: 50px;
-        background: #ddd;
-        border-radius: 8px;
+      .selection-checkbox {
+        width: 30px;
+        height: 30px;
+        border: 3px solid #333;
+        background: white;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.2rem;
+        flex-shrink: 0;
+        cursor: pointer;
+      }
+
+      .selection-checkbox.selected {
+        background: #28a745;
+      }
+
+      .checkmark {
+        color: white;
+        font-size: 20px;
         font-weight: bold;
-        color: #666;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .selection-checkbox.selected .checkmark {
+        opacity: 1;
+      }
+
+      .candidate-logo {
+        width: 60px;
+        height: 60px;
+        background: #5a7bd4;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: bold;
+        flex-shrink: 0;
       }
 
       .candidate-name {
-        font-size: 1.1rem;
+        font-size: 18px;
+        font-weight: bold;
         color: #333;
-        font-weight: 500;
+        flex-grow: 1;
       }
 
-      .selection-button {
-        width: 60px;
-        height: 40px;
-        background: #007bff;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .selection-button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
-      }
-
-      .selection-button.selected {
-        background: #dc3545;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        box-shadow:
-          0 0 20px rgba(220, 53, 69, 0.6),
-          inset 0 0 10px rgba(255, 255, 255, 0.2);
-        animation: ledPulse 2s infinite;
-      }
-
-      .selection-button.selected:hover {
-        transform: scale(1.1);
-      }
-
-      @keyframes ledPulse {
-        0%,
-        100% {
-          box-shadow:
-            0 0 20px rgba(220, 53, 69, 0.6),
-            inset 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-        50% {
-          box-shadow:
-            0 0 30px rgba(220, 53, 69, 0.8),
-            inset 0 0 15px rgba(255, 255, 255, 0.3);
-        }
-      }
-
-      /* Add a subtle inner highlight for LED effect */
-      .selection-button.selected::before {
-        content: "";
-        position: absolute;
-        top: 15%;
-        left: 20%;
-        width: 30%;
-        height: 30%;
-        background: rgba(255, 255, 255, 0.4);
-        border-radius: 50%;
-        filter: blur(2px);
+      .submit-section {
+        padding: 20px;
+        text-align: center;
+        border-top: 1px solid #ccc;
       }
 
       .submit-button {
-        margin: 2.5rem auto 0 auto;
-        display: block;
-        padding: 1rem 3rem;
-        font-size: 1.1rem;
-        background: #007bff;
+        background: #1e4a72;
         color: white;
         border: none;
-        border-radius: 8px;
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: bold;
         cursor: pointer;
         transition: background-color 0.2s ease;
-        font-weight: 600;
       }
 
       .submit-button:hover {
-        background: #0056b3;
+        background: #2d5a85;
       }
 
       .submit-button:disabled {
-        background: #ccc;
+        background: #999;
         cursor: not-allowed;
       }
 
       @media (max-width: 600px) {
         body {
-          padding: 1rem;
+          padding: 10px;
         }
 
-        .ballot-container {
-          padding: 1.5rem;
+        .ballot-title {
+          font-size: 24px;
         }
 
-        .candidate-info {
-          gap: 1rem;
+        .election-info {
+          font-size: 16px;
+        }
+
+        .candidate-option {
+          padding: 12px;
+          gap: 12px;
         }
 
         .candidate-logo {
-          width: 40px;
-          height: 40px;
-        }
-
-        .selection-button {
           width: 50px;
-          height: 35px;
-          border-radius: 17px;
+          height: 50px;
+          font-size: 18px;
         }
 
-        .selection-button.selected {
-          width: 45px;
-          height: 45px;
+        .candidate-name {
+          font-size: 16px;
         }
       }
     </style>
   </head>
   <body>
-    <h1 class="ballot-title">Vote for Head Boy</h1>
-
     <div class="ballot-container">
-      <div class="candidate-row" data-candidate="1">
-        <div class="candidate-info">
-          <div class="candidate-logo">A</div>
-          <span class="candidate-name">Alex Johnson</span>
-        </div>
-        <button class="selection-button" type="button"></button>
+      <!-- Ballot Header -->
+      <div class="ballot-header">
+        <h1 class="ballot-title">OFFICIAL BALLOT</h1>
+        <p class="election-info">General Election 2024</p>
+        <p class="voting-instruction">Mark your choices clearly</p>
       </div>
 
-      <div class="candidate-row" data-candidate="2">
-        <div class="candidate-info">
-          <div class="candidate-logo">B</div>
-          <span class="candidate-name">Blake Martinez</span>
-        </div>
-        <button class="selection-button" type="button"></button>
+      <!-- Instructions Section -->
+      <div class="instructions-section">
+        <h2 class="instructions-title">INSTRUCTIONS</h2>
+        <p class="instructions-text">
+          Click the selection box next to your preferred candidate. A green
+          checkmark will appear to confirm your selection. You may only vote for
+          one candidate.
+        </p>
       </div>
 
-      <div class="candidate-row" data-candidate="3">
-        <div class="candidate-info">
-          <div class="candidate-logo">C</div>
-          <span class="candidate-name">Cameron Davis</span>
+      <!-- Race Section -->
+      <div class="race-section">
+        <div class="race-header">
+          <h2 class="race-title">SPL BOY</h2>
+          <p class="race-subtitle">Vote for one (1)</p>
         </div>
-        <button class="selection-button" type="button"></button>
+
+        <div class="candidates-container">
+          <div class="candidate-option" data-candidate="sj">
+            <div class="selection-checkbox">
+              <span class="checkmark">✓</span>
+            </div>
+            <div class="candidate-logo">SJ</div>
+            <div class="candidate-name">Sarah Johnson</div>
+          </div>
+
+          <div class="candidate-option" data-candidate="mc">
+            <div class="selection-checkbox">
+              <span class="checkmark">✓</span>
+            </div>
+            <div class="candidate-logo">MC</div>
+            <div class="candidate-name">Michael Chen</div>
+          </div>
+
+          <div class="candidate-option" data-candidate="er">
+            <div class="selection-checkbox">
+              <span class="checkmark">✓</span>
+            </div>
+            <div class="candidate-logo">ER</div>
+            <div class="candidate-name">Elena Rodriguez</div>
+          </div>
+
+          <div class="candidate-option" data-candidate="dt">
+            <div class="selection-checkbox">
+              <span class="checkmark">✓</span>
+            </div>
+            <div class="candidate-logo">DT</div>
+            <div class="candidate-name">David Thompson</div>
+          </div>
+        </div>
       </div>
 
-      <div class="candidate-row" data-candidate="4">
-        <div class="candidate-info">
-          <div class="candidate-logo">D</div>
-          <span class="candidate-name">Dylan Thompson</span>
-        </div>
-        <button class="selection-button" type="button"></button>
-      </div>
-
-      <div class="candidate-row" data-candidate="5">
-        <div class="candidate-info">
-          <div class="candidate-logo">E</div>
-          <span class="candidate-name">Ethan Wilson</span>
-        </div>
-        <button class="selection-button" type="button"></button>
-      </div>
-
-      <div class="candidate-row" data-candidate="6">
-        <div class="candidate-info">
-          <div class="candidate-logo">F</div>
-          <span class="candidate-name">Felix Rodriguez</span>
-        </div>
-        <button class="selection-button" type="button"></button>
-      </div>
-
-      <div class="candidate-row" data-candidate="7">
-        <div class="candidate-info">
-          <div class="candidate-logo">G</div>
-          <span class="candidate-name">Gabriel Lee</span>
-        </div>
-        <button class="selection-button" type="button"></button>
-      </div>
-
-      <div class="candidate-row" data-candidate="8">
-        <div class="candidate-info">
-          <div class="candidate-logo">H</div>
-          <span class="candidate-name">Henry Anderson</span>
-        </div>
-        <button class="selection-button" type="button"></button>
+      <!-- Submit Section -->
+      <div class="submit-section">
+        <button class="submit-button" onclick="submitVote()">
+          SUBMIT BALLOT
+        </button>
       </div>
     </div>
-
-    <button class="submit-button" onclick="submitVote()">Submit Vote</button>
 
     <script>
       let selectedCandidate = null;
 
-      // Add click listeners to all candidate rows
-      document.querySelectorAll(".candidate-row").forEach((row) => {
-        row.addEventListener("click", () => {
-          const candidateId = row.dataset.candidate;
-          selectCandidate(candidateId, row);
+      // Add click listeners to all candidate options
+      document.querySelectorAll(".candidate-option").forEach((option) => {
+        option.addEventListener("click", () => {
+          const candidateId = option.dataset.candidate;
+          selectCandidate(candidateId, option);
         });
       });
 
-      // Add click listeners to selection buttons to prevent event bubbling
-      document.querySelectorAll(".selection-button").forEach((button) => {
-        button.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const row = button.closest(".candidate-row");
-          const candidateId = row.dataset.candidate;
-          selectCandidate(candidateId, row);
-        });
-      });
-
-      function selectCandidate(candidateId, rowElement) {
+      function selectCandidate(candidateId, optionElement) {
         // Remove selection from all candidates
-        document.querySelectorAll(".selection-button").forEach((button) => {
-          button.classList.remove("selected");
+        document.querySelectorAll(".selection-checkbox").forEach((checkbox) => {
+          checkbox.classList.remove("selected");
         });
 
         // Add selection to clicked candidate
-        const selectionButton = rowElement.querySelector(".selection-button");
-        selectionButton.classList.add("selected");
+        const checkbox = optionElement.querySelector(".selection-checkbox");
+        checkbox.classList.add("selected");
 
         // Update selected candidate
         selectedCandidate = candidateId;
 
         // Get candidate name for tracking
         const candidateName =
-          rowElement.querySelector(".candidate-name").textContent;
+          optionElement.querySelector(".candidate-name").textContent;
         console.log(`Selected: ${candidateName}`);
       }
 
       function submitVote() {
         if (!selectedCandidate) {
-          alert("Please select a candidate before submitting your vote.");
+          alert("Please select a candidate before submitting your ballot.");
           return;
         }
 
-        const selectedRow = document.querySelector(
+        const selectedOption = document.querySelector(
           `[data-candidate="${selectedCandidate}"]`,
         );
         const candidateName =
-          selectedRow.querySelector(".candidate-name").textContent;
+          selectedOption.querySelector(".candidate-name").textContent;
 
         // Show confirmation
         const confirmed = confirm(
-          `You are voting for: ${candidateName}\n\nAre you sure you want to submit this vote?`,
+          `You are voting for: ${candidateName}\n\nAre you sure you want to submit this ballot?`,
         );
 
         if (confirmed) {
           alert(
-            `Vote submitted successfully!\n\nYou voted for: ${candidateName}`,
+            `Ballot submitted successfully!\n\nYou voted for: ${candidateName}`,
           );
 
           // Disable further voting
-          document.querySelectorAll(".candidate-row").forEach((row) => {
-            row.style.pointerEvents = "none";
-            row.style.opacity = "0.6";
+          document.querySelectorAll(".candidate-option").forEach((option) => {
+            option.style.pointerEvents = "none";
+            option.style.opacity = "0.7";
           });
 
-          document.querySelector(".submit-button").disabled = true;
-          document.querySelector(".submit-button").textContent =
-            "Vote Submitted";
+          const submitButton = document.querySelector(".submit-button");
+          submitButton.disabled = true;
+          submitButton.textContent = "BALLOT SUBMITTED";
         }
       }
 
       // Add keyboard navigation
       document.addEventListener("keydown", (e) => {
-        const rows = Array.from(document.querySelectorAll(".candidate-row"));
+        const options = Array.from(
+          document.querySelectorAll(".candidate-option"),
+        );
         const currentSelected = document
-          .querySelector(".selection-button.selected")
-          ?.closest(".candidate-row");
-        let currentIndex = currentSelected ? rows.indexOf(currentSelected) : -1;
+          .querySelector(".selection-checkbox.selected")
+          ?.closest(".candidate-option");
+        let currentIndex = currentSelected
+          ? options.indexOf(currentSelected)
+          : -1;
 
         if (e.key === "ArrowDown") {
           e.preventDefault();
-          currentIndex = (currentIndex + 1) % rows.length;
+          currentIndex = (currentIndex + 1) % options.length;
           selectCandidate(
-            rows[currentIndex].dataset.candidate,
-            rows[currentIndex],
+            options[currentIndex].dataset.candidate,
+            options[currentIndex],
           );
         } else if (e.key === "ArrowUp") {
           e.preventDefault();
-          currentIndex = currentIndex <= 0 ? rows.length - 1 : currentIndex - 1;
+          currentIndex =
+            currentIndex <= 0 ? options.length - 1 : currentIndex - 1;
           selectCandidate(
-            rows[currentIndex].dataset.candidate,
-            rows[currentIndex],
+            options[currentIndex].dataset.candidate,
+            options[currentIndex],
           );
         } else if (e.key === "Enter" && selectedCandidate) {
           submitVote();
         }
       });
+
+      // Add accessibility focus management
+      document.querySelectorAll(".candidate-option").forEach((option) => {
+        option.setAttribute("tabindex", "0");
+        option.setAttribute("role", "radio");
+        option.setAttribute("aria-checked", "false");
+
+        option.addEventListener("keydown", (e) => {
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            option.click();
+          }
+        });
+      });
+
+      // Update aria-checked when selection changes
+      function updateAriaChecked() {
+        document.querySelectorAll(".candidate-option").forEach((option) => {
+          const isSelected = option.querySelector(
+            ".selection-checkbox.selected",
+          );
+          option.setAttribute("aria-checked", isSelected ? "true" : "false");
+        });
+      }
+
+      // Override selectCandidate to include accessibility updates
+      const originalSelectCandidate = selectCandidate;
+      selectCandidate = function (candidateId, optionElement) {
+        originalSelectCandidate(candidateId, optionElement);
+        updateAriaChecked();
+      };
     </script>
   </body>
 </html>
