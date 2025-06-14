@@ -5,6 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Official Ballot - General Election 2024</title>
     <style>
+      /* --- BLUE & RED COLOR SCHEME --- */
+
+      /* 1. Header (Top Bar) */
+.ballot-header {
+  background: #0033a0 !important; /* Deep blue */
+  color: #fff !important;
+  text-align: center;
+  padding: 20px;
+}
+
+/* 2. Background */
+body {
+  background: #fff !important;
+}
+
+/* 3. Candidate Boxes */
+.candidate-option {
+  min-height: 240px;
+  padding: 48px 40px;
+  font-size: 1.5rem;
+
+  background: #e3e8fa !important; /* Light blue */ 
+  border: none !important; /* Remove border */
+  color: #003366 !important; /* Dark blue text */
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(51, 51, 102, 0.10);
+  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+}
+
+/* 4. Candidate Text */
+.candidate-option .candidate-name,
+.candidate-option .candidate-details {
+  color: #003366 !important;
+}
+
+/* 5. Toggle Switch (Selected State) */
+.candidate-option.selected .indicator-light {
+  background: #d32f2f !important; /* Red */
+  border-color: #d32f2f !important;
+  box-shadow: 0 0 8px 2px #d32f2f !important;
+}
+.candidate-option.selected .indicator-light::after {
+  background: radial-gradient(circle at 30% 30%, #d32f2f 60%, #a31515 100%) !important;
+  box-shadow: 0 0 8px 2px #d32f2f !important;
+}
+
+/* 7. “Submit Ballot” Button */
+.submit-button {
+  background: #0033a0 !important; /* Blue */
+  color: #fff !important;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 51, 160, 0.15);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.submit-button:hover {
+  background: #d32f2f !important; /* Red on hover */
+  box-shadow: 0 0 12px 2px #e3e8fa;
+}
+
+/* 8. Borders and Lines */
+.ballot-container {
+  max-width: 1200px;
+  min-height: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border: 2px solid #0033a0 !important;
+  border-radius: 20px;
+}
+
+/* 9. Hover Effects */
+.candidate-option:hover {
+  box-shadow: 0 0 16px 4px #e3e8fa;
+  border-color: #0033a0 !important;
+  background: #c5d2f2 !important;
+}
+.selection-button {
+  height: 100%;
+  min-height: 80px;
+  min-width: 160px;
+  font-size: 1.5rem;
+  padding: 0 32px;
+  border-radius: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background: #0033a0 !important;
+  color: #fff !important;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 3px 10px rgba(0, 51, 160, 0.15);
+}
+
+/* Green on hover and when selected */
+.selection-button:hover,
+.candidate-option.selected .selection-button {
+  background: #00b86b !important;
+  color: #fff !important;
+  box-shadow: 0 0 12px 2px #b6f5d8;
+}
+
+/* Remove gradients and non-blue/red colors from candidate-option and ballot-header */
+.candidate-option,
+.ballot-header {
+  background-image: none !important;
+}
+
       body {
         font-family: Arial, sans-serif;
         background: #f5f5f5;
@@ -12,16 +130,16 @@
         padding: 20px;
       }
 
-      .ballot-container {
-        max-width: 800px;
-        margin: 0 auto;
-        background: white;
-        border: 2px solid #333;
-      }
+     .ballot-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  background: white;
+  border: 2px solid #333;
+}
 
       .ballot-header {
-        background: rgba(4, 87, 172, 1);
-        color: white;
+        background: linear-gradient(90deg, #4f8cff, #6ee7b7, #fbbf24);
+        color: #fff;
         text-align: center;
         padding: 20px;
       }
@@ -89,29 +207,35 @@
         margin: 0;
       }
 
-      .candidates-container {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
+   .candidates-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns side by side */
+  gap: 32px;
+  width: 100%;
+   }
+   
 
       .candidate-option {
-        border: 2px solid #333;
-        padding: 20px;
+        background: linear-gradient(135deg, #fbbf24 0%, #6ee7b7 100%);
+        border: 2px solid #4f8cff;
+        box-shadow: 0 4px 16px rgba(79, 140, 255, 0.15);
+        padding: 32px 24px; 
         display: flex;
         align-items: center;
         gap: 20px;
         cursor: pointer;
-        transition: background-color 0.2s ease;
+        transition: transform 0.2s, box-shadow 0.2s;
       }
 
       .candidate-option:hover {
-        background: #f9f9f9;
+        transform: scale(1.03);
+        box-shadow: 0 8px 24px rgba(79, 140, 255, 0.25);
       }
 
       .candidate-logo {
-        width: 100px;
-        height: 100px;
+
+        width: 200px;
+        height: 200px;
         background: #5a7bd4;
         color: white;
         display: flex;
@@ -136,21 +260,21 @@
         gap: 15px;
       }
 
-      .selection-button {
-        width: 60px;
-        height: 35px;
-        background: #007bff;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
-        flex-shrink: 0;
-      }
+.selection-button {
+    background: linear-gradient(90deg, #4f8cff, #fbbf24);
+    color: #fff;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
+    flex-shrink: 0;
+    font-size: 2rem; /* Makes any icon or text inside bigger */
+}
 
       .selection-button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        background: linear-gradient(90deg, #6ee7b7, #4f8cff);
+        color: #222;
       }
 
       .indicator-light {
@@ -202,7 +326,7 @@
       /* Selected state - glowing red LED */
       .candidate-option.selected .indicator-light {
         background: linear-gradient(145deg, #3a1a1a, #2a1212);
-        border-color: #8b0000;
+        border-color: #b81212;
         box-shadow:
           inset 0 2px 4px rgba(0, 0, 0, 0.3),
           inset 0 -2px 4px rgba(255, 100, 100, 0.1),
@@ -260,13 +384,13 @@
       }
 
       .submit-section {
-        padding: 20px;
+        padding: 30px;
         text-align: center;
         border-top: 1px solid #ccc;
       }
 
       .submit-button {
-        background: rgba(4, 87, 172, 1);
+        background: rgb(81, 86, 90);
         color: white;
         border: none;
         padding: 12px 30px;
@@ -308,9 +432,9 @@
         }
 
         .selection-button {
-          width: 50px;
-          height: 30px;
-          border-radius: 20px;
+          width: 100px;
+          height: 100px;
+          border-radius: 210px;
         }
 
         .indicator-light {
@@ -343,6 +467,11 @@
           font-size: 18px;
         }
       }
+
+.indicator-light {
+  pointer-events: none;
+}
+
     </style>
   </head>
   <body>
@@ -354,15 +483,7 @@
         <p class="voting-instruction">Mark your choices clearly</p>
       </div>
 
-      <!-- Instructions Section -->
-      <div class="instructions-section">
-        <h2 class="instructions-title">INSTRUCTIONS</h2>
-        <p class="instructions-text">
-          Click the selection button next to your preferred candidate. The
-          indicator light will turn red to confirm your selection. You may only
-          vote for one candidate.
-        </p>
-      </div>
+     
 
       <!-- Race Section -->
       <div class="race-section">
@@ -385,17 +506,19 @@
             <div class="candidate-logo">MC</div>
             <div class="candidate-name">Michael Chen</div>
             <div class="voting-controls">
+               <div class="indicator-light"></div>
               <button class="selection-button" type="button"></button>
-              <div class="indicator-light"></div>
+             
             </div>
           </div>
 
           <div class="candidate-option" data-candidate="er">
-            <div class="candidate-logo">ER</div>
+            <div class="candidate-logo"><img src="IMG.jpg" ></div> 
             <div class="candidate-name">Elena Rodriguez</div>
             <div class="voting-controls">
+               <div class="indicator-light"></div>
               <button class="selection-button" type="button"></button>
-              <div class="indicator-light"></div>
+             
             </div>
           </div>
 
@@ -403,8 +526,9 @@
             <div class="candidate-logo">DT</div>
             <div class="candidate-name">David Thompson</div>
             <div class="voting-controls">
-              <button class="selection-button" type="button"></button>
               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+              
             </div>
           </div>
 
@@ -412,8 +536,9 @@
             <div class="candidate-logo">JB</div>
             <div class="candidate-name">Jessica Brown</div>
             <div class="voting-controls">
+               <div class="indicator-light"></div>
               <button class="selection-button" type="button"></button>
-              <div class="indicator-light"></div>
+             
             </div>
           </div>
 
@@ -421,8 +546,9 @@
             <div class="candidate-logo">RK</div>
             <div class="candidate-name">Ryan Kim</div>
             <div class="voting-controls">
+               <div class="indicator-light"></div>
               <button class="selection-button" type="button"></button>
-              <div class="indicator-light"></div>
+             
             </div>
           </div>
 
@@ -430,8 +556,9 @@
             <div class="candidate-logo">AG</div>
             <div class="candidate-name">Ashley Garcia</div>
             <div class="voting-controls">
+                <div class="indicator-light"></div>
               <button class="selection-button" type="button"></button>
-              <div class="indicator-light"></div>
+            
             </div>
           </div>
 
@@ -439,8 +566,9 @@
             <div class="candidate-logo">MW</div>
             <div class="candidate-name">Marcus Williams</div>
             <div class="voting-controls">
+               <div class="indicator-light"></div>
               <button class="selection-button" type="button"></button>
-              <div class="indicator-light"></div>
+             
             </div>
           </div>
         </div>
