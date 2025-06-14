@@ -1,0 +1,23 @@
+{
+  "name": "election-poll",
+  "version": "1.0.0",
+  "description": "School Election Ballot Application",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "start": "npx serve . -p 3000",
+    "build": "echo 'No build step needed for static HTML'",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "election",
+    "ballot",
+    "voting",
+    "school"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
