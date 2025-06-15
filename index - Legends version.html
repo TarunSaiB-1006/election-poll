@@ -258,8 +258,22 @@
 
       .voting-controls {
         display: flex;
+        flex-direction: row;
         align-items: center;
-        gap: 15px;
+        gap: 8px;
+        justify-content: flex-end;
+      }
+
+      .indicator-light {
+        order: 1;
+        margin-right: 0;
+        margin-left: 0;
+      }
+
+      .selection-button {
+        order: 2;
+        margin-left: 0;
+        margin-right: 0;
       }
 
       .selection-button {
@@ -496,6 +510,7 @@
           gap: 6px;
           margin-left: 0;
           flex-shrink: 0;
+          justify-content: flex-end;
         }
         .selection-button {
           min-width: 44px;
@@ -610,6 +625,7 @@
     gap: 4px;
     margin-left: 0;
     flex-shrink: 0;
+    justify-content: flex-end;
   }
   .selection-button {
     min-width: 30px;
@@ -777,11 +793,128 @@
     flex-shrink: 0 !important;
   }
 }
+/* --- Selection Button Expansion and Punchhole Effect --- */
+.voting-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.indicator-light {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #eee;
+  border: 2px solid #bbb;
+  margin-right: 0;
+  margin-left: 0;
+  position: relative;
+  z-index: 4;
+  transition: background 0.2s, border 0.2s;
+}
+
+.candidate-option.selected .indicator-light {
+  background: #00b86b;
+  border-color: #00b86b;
+}
+
+.selection-button {
+  position: relative;
+  overflow: visible;
+  min-width: 36px;
+  height: 32px;
+  font-size: 0.95rem;
+  border-radius: 16px;
+  border: none;
+  background: #e3e8fa;
+  color: #0033a0;
+  cursor: pointer;
+  transition: width 0.35s cubic-bezier(.7,1.7,.5,1), background 0.2s, color 0.2s;
+  z-index: 2;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Expanded state for selection button */
+.candidate-option.selected .selection-button {
+  width: 150px !important;
+  min-width: 150px !important;
+  background: #00b86b !important;
+  color: #fff !important;
+  box-shadow: 0 0 12px 2px #b6f5d8;
+  transition: width 0.35s cubic-bezier(.7,1.7,.5,1), background 0.2s;
+  justify-content: flex-start;
+  padding-left: 38px;
+}
+
+/* Punchhole effect for indicator light */
+.candidate-option.selected .selection-button::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: 0 0 0 2px #00b86b;
+  pointer-events: none;
+}
+
+/* Outward arrow on left */
+.candidate-option.selected .selection-button::after {
+  content: "";
+  position: absolute;
+  left: -46px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-right: 18px solid #00b86b;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Show "Vote" text and arrow only when selected */
+.selection-button .vote-label,
+.selection-button .vote-arrow {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.candidate-option.selected .selection-button .vote-label,
+.candidate-option.selected .selection-button .vote-arrow {
+  display: inline-block;
+  opacity: 1;
+  transition: opacity 0.2s 0.15s;
+}
+
+.vote-label {
+  margin-right: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.vote-arrow {
+  margin-left: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
     </style>
   </head>
   <body>
     {% load static %}
-    <div class="ballot-container">
+    <div class="ballot-container ballot-page" id="page-1">
       <div class="ballot-header">
         <h1 class="ballot-title">OFFICIAL BALLOT</h1>
         <p class="election-info">General Election 2024</p>
@@ -796,35 +929,130 @@
             <p class="race-subtitle">Vote for one (1)</p>
           </div>
           <div class="candidates-container">
-            <!-- Example candidates for BSPL -->
-            {% if spl_candidate_list_boys %} 
-            {% for candidate in spl_candidate_list_boys %}
-
-            <div class="candidate-option" data-candidate="{{ candidate.uid }}">
-              <div class="candidate-logo">
-                <img
-                  src="{% static ''%}{{candidate.logo_path.name}}"
-                  alt="Candidate Logo"
-                  style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"
-                />
-              </div>
-              <div class="candidate-name">{{ candidate.name }}</div>
+            <!-- 10 Placeholder Candidates for BSPL -->
+            <div class="candidate-option" data-candidate="bspl1">
+              <div class="candidate-logo">A1</div>
+              <div class="candidate-name">BSPL Candidate 1</div>
               <div class="voting-controls">
-                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
               </div>
             </div>
-
-            {% endfor %}
-            {% endif %}
-            
+            <div class="candidate-option" data-candidate="bspl2">
+              <div class="candidate-logo">A2</div>
+              <div class="candidate-name">BSPL Candidate 2</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl3">
+              <div class="candidate-logo">A3</div>
+              <div class="candidate-name">BSPL Candidate 3</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl4">
+              <div class="candidate-logo">A4</div>
+              <div class="candidate-name">BSPL Candidate 4</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl5">
+              <div class="candidate-logo">A5</div>
+              <div class="candidate-name">BSPL Candidate 5</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl6">
+              <div class="candidate-logo">A6</div>
+              <div class="candidate-name">BSPL Candidate 6</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl7">
+              <div class="candidate-logo">A7</div>
+              <div class="candidate-name">BSPL Candidate 7</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl8">
+              <div class="candidate-logo">A8</div>
+              <div class="candidate-name">BSPL Candidate 8</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl9">
+              <div class="candidate-logo">A9</div>
+              <div class="candidate-name">BSPL Candidate 9</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl10">
+              <div class="candidate-logo">A10</div>
+              <div class="candidate-name">BSPL Candidate 10</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="submit-section">
-          <button class="back-button" onclick="goBackStep()">BACK</button>
-          <button class="next-button" onclick="goNextStep()" disabled>
-            NEXT
-          </button>
           <button
             class="submit-button"
             onclick="submitVote('bspl')"
@@ -842,35 +1070,130 @@
             <p class="race-subtitle">Vote for one (1)</p>
           </div>
           <div class="candidates-container">
-            <!-- Example candidates for BASPL -->
-            {% if spl_candidate_list_boys %} 
-            {% for candidate in aspl_candidate_list_boys %}
-
-            <div class="candidate-option" data-candidate="{{ candidate.uid }}">
-              <div class="candidate-logo">
-                <img
-                  src="https://picsum.photos/200"
-                  alt="Candidate Logo"
-                  style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"
-                />
-              </div>
-              <div class="candidate-name">{{ candidate.name }}</div>
+            <!-- 10 Placeholder Candidates for BASPL -->
+            <div class="candidate-option" data-candidate="baspl1">
+              <div class="candidate-logo">B1</div>
+              <div class="candidate-name">BASPL Candidate 1</div>
               <div class="voting-controls">
-                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
               </div>
             </div>
-
-            {% endfor %}
-            {% endif %}
-
+            <div class="candidate-option" data-candidate="baspl2">
+              <div class="candidate-logo">B2</div>
+              <div class="candidate-name">BASPL Candidate 2</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl3">
+              <div class="candidate-logo">B3</div>
+              <div class="candidate-name">BASPL Candidate 3</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl4">
+              <div class="candidate-logo">B4</div>
+              <div class="candidate-name">BASPL Candidate 4</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl5">
+              <div class="candidate-logo">B5</div>
+              <div class="candidate-name">BASPL Candidate 5</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl6">
+              <div class="candidate-logo">B6</div>
+              <div class="candidate-name">BASPL Candidate 6</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl7">
+              <div class="candidate-logo">B7</div>
+              <div class="candidate-name">BASPL Candidate 7</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl8">
+              <div class="candidate-logo">B8</div>
+              <div class="candidate-name">BASPL Candidate 8</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl9">
+              <div class="candidate-logo">B9</div>
+              <div class="candidate-name">BASPL Candidate 9</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl10">
+              <div class="candidate-logo">B10</div>
+              <div class="candidate-name">BASPL Candidate 10</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="submit-section">
-          <button class="back-button" onclick="goBackStep()">BACK</button>
-          <button class="next-button" onclick="goNextStep()" disabled>
-            NEXT
-          </button>
           <button
             class="submit-button"
             onclick="submitVote('baspl')"
@@ -888,35 +1211,130 @@
             <p class="race-subtitle">Vote for one (1)</p>
           </div>
           <div class="candidates-container">
-            <!-- Example candidates for GSPL -->
-            {% if spl_candidate_list_girls %} 
-            {% for candidate in spl_candidate_list_girls %}
-
-            <div class="candidate-option" data-candidate="{{ candidate.uid }}">
-              <div class="candidate-logo">
-                <img
-                  src="https://picsum.photos/200"
-                  alt="Candidate Logo"
-                  style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"
-                />
-              </div>
-              <div class="candidate-name">{{ candidate.name }}</div>
+            <!-- 10 Placeholder Candidates for GSPL -->
+            <div class="candidate-option" data-candidate="gspl1">
+              <div class="candidate-logo">C1</div>
+              <div class="candidate-name">GSPL Candidate 1</div>
               <div class="voting-controls">
-                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
               </div>
             </div>
-
-            {% endfor %}
-            {% endif %}
-
+            <div class="candidate-option" data-candidate="gspl2">
+              <div class="candidate-logo">C2</div>
+              <div class="candidate-name">GSPL Candidate 2</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl3">
+              <div class="candidate-logo">C3</div>
+              <div class="candidate-name">GSPL Candidate 3</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl4">
+              <div class="candidate-logo">C4</div>
+              <div class="candidate-name">GSPL Candidate 4</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl5">
+              <div class="candidate-logo">C5</div>
+              <div class="candidate-name">GSPL Candidate 5</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl6">
+              <div class="candidate-logo">C6</div>
+              <div class="candidate-name">GSPL Candidate 6</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl7">
+              <div class="candidate-logo">C7</div>
+              <div class="candidate-name">GSPL Candidate 7</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl8">
+              <div class="candidate-logo">C8</div>
+              <div class="candidate-name">GSPL Candidate 8</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl9">
+              <div class="candidate-logo">C9</div>
+              <div class="candidate-name">GSPL Candidate 9</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl10">
+              <div class="candidate-logo">C10</div>
+              <div class="candidate-name">GSPL Candidate 10</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="submit-section">
-          <button class="back-button" onclick="goBackStep()">BACK</button>
-          <button class="next-button" onclick="goNextStep()" disabled>
-            NEXT
-          </button>
           <button
             class="submit-button"
             onclick="submitVote('gspl')"
@@ -934,35 +1352,130 @@
             <p class="race-subtitle">Vote for one (1)</p>
           </div>
           <div class="candidates-container">
-            <!-- Example candidates for GASPL -->
-            {% if aspl_candidate_list_girls %} 
-            {% for candidate in aspl_candidate_list_girls %}
-
-            <div class="candidate-option" data-candidate="{{ candidate.uid }}">
-              <div class="candidate-logo">
-                <img
-                  src="https://picsum.photos/200"
-                  alt="Candidate Logo"
-                  style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"
-                />
-              </div>
-              <div class="candidate-name">{{ candidate.name }}</div>
+            <!-- 10 Placeholder Candidates for GASPL -->
+            <div class="candidate-option" data-candidate="gaspl1">
+              <div class="candidate-logo">D1</div>
+              <div class="candidate-name">GASPL Candidate 1</div>
               <div class="voting-controls">
-                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
               </div>
             </div>
-
-            {% endfor %}
-            {% endif %}
-            
+            <div class="candidate-option" data-candidate="gaspl2">
+              <div class="candidate-logo">D2</div>
+              <div class="candidate-name">GASPL Candidate 2</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl3">
+              <div class="candidate-logo">D3</div>
+              <div class="candidate-name">GASPL Candidate 3</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl4">
+              <div class="candidate-logo">D4</div>
+              <div class="candidate-name">GASPL Candidate 4</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl5">
+              <div class="candidate-logo">D5</div>
+              <div class="candidate-name">GASPL Candidate 5</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl6">
+              <div class="candidate-logo">D6</div>
+              <div class="candidate-name">GASPL Candidate 6</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl7">
+              <div class="candidate-logo">D7</div>
+              <div class="candidate-name">GASPL Candidate 7</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl8">
+              <div class="candidate-logo">D8</div>
+              <div class="candidate-name">GASPL Candidate 8</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl9">
+              <div class="candidate-logo">D9</div>
+              <div class="candidate-name">GASPL Candidate 9</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl10">
+              <div class="candidate-logo">D10</div>
+              <div class="candidate-name">GASPL Candidate 10</div>
+              <div class="voting-controls">
+                <div class="indicator-light"></div>
+                <button class="selection-button">
+                  <span class="vote-label">Vote</span>
+                  Select
+                  <span class="vote-arrow">&#8592;</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="submit-section">
-          <button class="back-button" onclick="goBackStep()">BACK</button>
-          <button class="next-button" onclick="goNextStep()" disabled>
-            NEXT
-          </button>
           <button
             class="submit-button"
             onclick="submitVote('gaspl')"
@@ -1179,8 +1692,17 @@ function getCookie(name) {
             .forEach((opt) => opt.classList.remove("selected"));
           option.classList.add("selected");
           selections[step] = option.children[1].textContent;
-          uuid[step] = option.dataset.candidate
+          uuid[step] = option.dataset.candidate;
           updateNextButton(step);
+
+          // Automatically go to next step after selection
+          const idx = steps.indexOf(step);
+          if (idx < steps.length - 1) {
+            setTimeout(() => showStep(steps[idx + 1]), 200); // Small delay for visual feedback
+          } else {
+            // On last step, show submit button
+            document.querySelector(`#ballot-${step} .submit-button`).style.display = "";
+          }
         });
       });
 
@@ -1251,6 +1773,14 @@ function getCookie(name) {
 
       // Initialize: show first step
       showStep("bspl");
+
+      // Ensure "Vote" and arrow are hidden by default and shown only when selected
+document.querySelectorAll(".selection-button").forEach((btn) => {
+  // Add label and arrow spans if not present
+  if (!btn.querySelector(".vote-label")) {
+    btn.innerHTML = `<span class="vote-label">Vote</span>${btn.innerHTML}<span class="vote-arrow">&#8592;</span>`;
+  }
+});
     </script>
   </body>
 </html>
