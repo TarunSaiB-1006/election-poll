@@ -9,8 +9,8 @@
 
       /* 1. Header (Top Bar) */
 .ballot-header {
-  background: #0033a0 !important; /* Deep blue */
-  color: #fff !important;
+  background: #ff0000 !important; /* Deep blue */
+  color: #000000 !important;
   text-align: center;
   padding: 20px;
 }
@@ -28,14 +28,14 @@ body {
 
   background: #e3e8fa !important; /* Light blue */ 
   border: none !important; /* Remove border */
-  color: #003366 !important; /* Dark blue text */
+  color: #ffffff !important; /* Dark blue text */
   border-radius: 20px;
   box-shadow: 0 4px 16px rgba(51, 51, 102, 0.10);
-  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+  transition: none !important;
   display: flex;
   align-items: center;
   gap: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 0; /* Remove extra space below each option */
   box-sizing: border-box;
 }
 
@@ -58,7 +58,7 @@ body {
 
 /* 7. “Submit Ballot” Button */
 .submit-button {
-  background: #0033a0 !important; /* Blue */
+  background: #a9bfef !important; /* Blue */
   color: #fff !important;
   border: none;
   border-radius: 8px;
@@ -80,15 +80,13 @@ body {
   min-height: 900px;
   margin: 0 auto;
   background: #fff;
-  border: 2px solid #0033a0 !important;
+  border: 2px solid #ffffff !important;
   border-radius: 20px;
 }
 
 /* 9. Hover Effects */
 .candidate-option:hover {
-  box-shadow: 0 0 16px 4px #e3e8fa;
-  border-color: #0033a0 !important;
-  background: #c5d2f2 !important;
+  /* No hover effect */
 }
 .selection-button {
   height: 100%;
@@ -101,7 +99,7 @@ body {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background: #0033a0 !important;
+  background: #87c683 !important;
   color: #fff !important;
   border: none;
   cursor: pointer;
@@ -210,7 +208,7 @@ body {
    .candidates-container {
   display: grid;
   grid-template-columns: 1fr 1fr; /* Two columns side by side */
-  gap: 32px;
+  gap: 8px; /* Reduce gap to bring candidate options closer */
   width: 100%;
    }
    
@@ -483,8 +481,6 @@ body {
         <p class="voting-instruction">Mark your choices clearly</p>
       </div>
 
-     
-
       <!-- Race Section -->
       <div class="race-section">
         <div class="race-header">
@@ -492,7 +488,250 @@ body {
           <p class="race-subtitle">Vote for one (1)</p>
         </div>
 
-        <div class="candidates-container">
+        <div class="candidates-container" id="candidates-1">
+          <div class="candidate-option" data-candidate="sj">
+            <div class="candidate-logo">SJ</div>
+            <div class="candidate-name">Sarah Johnson</div>
+            <div class="voting-controls">
+              <button class="selection-button" type="button"></button>
+              <div class="indicator-light"></div>
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="mc">
+            <div class="candidate-logo">MC</div>
+            <div class="candidate-name">Michael Chen</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="er">
+            <div class="candidate-logo"><img src="IMG.jpg" ></div> 
+            <div class="candidate-name">Elena Rodriguez</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="dt">
+            <div class="candidate-logo">DT</div>
+            <div class="candidate-name">David Thompson</div>
+            <div class="voting-controls">
+              <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+              
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="jb">
+            <div class="candidate-logo">JB</div>
+            <div class="candidate-name">Jessica Brown</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="rk">
+            <div class="candidate-logo">RK</div>
+            <div class="candidate-name">Ryan Kim</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="ag">
+            <div class="candidate-logo">AG</div>
+            <div class="candidate-name">Ashley Garcia</div>
+            <div class="voting-controls">
+                <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+            
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="mw">
+            <div class="candidate-logo">MW</div>
+            <div class="candidate-name">Marcus Williams</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+        </div>
+
+        <div class="candidates-container" id="candidates-2">
+          <div class="candidate-option" data-candidate="sj">
+            <div class="candidate-logo">SJ</div>
+            <div class="candidate-name">Sarah Johnson</div>
+            <div class="voting-controls">
+              <button class="selection-button" type="button"></button>
+              <div class="indicator-light"></div>
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="mc">
+            <div class="candidate-logo">MC</div>
+            <div class="candidate-name">Michael Chen</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="er">
+            <div class="candidate-logo"><img src="IMG.jpg" ></div> 
+            <div class="candidate-name">Elena Rodriguez</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="dt">
+            <div class="candidate-logo">DT</div>
+            <div class="candidate-name">David Thompson</div>
+            <div class="voting-controls">
+              <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+              
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="jb">
+            <div class="candidate-logo">JB</div>
+            <div class="candidate-name">Jessica Brown</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="rk">
+            <div class="candidate-logo">RK</div>
+            <div class="candidate-name">Ryan Kim</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="ag">
+            <div class="candidate-logo">AG</div>
+            <div class="candidate-name">Ashley Garcia</div>
+            <div class="voting-controls">
+                <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+            
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="mw">
+            <div class="candidate-logo">MW</div>
+            <div class="candidate-name">Marcus Williams</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+        </div>
+
+        <div class="candidates-container" id="candidates-3">
+          <div class="candidate-option" data-candidate="sj">
+            <div class="candidate-logo">SJ</div>
+            <div class="candidate-name">Sarah Johnson</div>
+            <div class="voting-controls">
+              <button class="selection-button" type="button"></button>
+              <div class="indicator-light"></div>
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="mc">
+            <div class="candidate-logo">MC</div>
+            <div class="candidate-name">Michael Chen</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="er">
+            <div class="candidate-logo"><img src="IMG.jpg" ></div> 
+            <div class="candidate-name">Elena Rodriguez</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="dt">
+            <div class="candidate-logo">DT</div>
+            <div class="candidate-name">David Thompson</div>
+            <div class="voting-controls">
+              <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+              
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="jb">
+            <div class="candidate-logo">JB</div>
+            <div class="candidate-name">Jessica Brown</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="rk">
+            <div class="candidate-logo">RK</div>
+            <div class="candidate-name">Ryan Kim</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="ag">
+            <div class="candidate-logo">AG</div>
+            <div class="candidate-name">Ashley Garcia</div>
+            <div class="voting-controls">
+                <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+            
+            </div>
+          </div>
+
+          <div class="candidate-option" data-candidate="mw">
+            <div class="candidate-logo">MW</div>
+            <div class="candidate-name">Marcus Williams</div>
+            <div class="voting-controls">
+               <div class="indicator-light"></div>
+              <button class="selection-button" type="button"></button>
+             
+            </div>
+          </div>
+        </div>
+
+        <div class="candidates-container" id="candidates-4">
           <div class="candidate-option" data-candidate="sj">
             <div class="candidate-logo">SJ</div>
             <div class="candidate-name">Sarah Johnson</div>
@@ -583,6 +822,19 @@ body {
     </div>
 
     <script>
+      let currentPage = 1;
+      const totalPages = 4;
+
+      function goToNextPage() {
+        document.getElementById('page-' + currentPage).classList.add('hidden');
+        currentPage++;
+        if (currentPage > totalPages) {
+          document.getElementById('final-page').classList.remove('hidden');
+        } else {
+          document.getElementById('page-' + currentPage).classList.remove('hidden');
+        }
+      }
+
       let selectedCandidate = null;
 
       // Add click listeners to all candidate options
