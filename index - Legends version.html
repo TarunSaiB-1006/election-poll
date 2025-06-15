@@ -9,7 +9,7 @@
 
       /* 1. Header (Top Bar) */
       .ballot-header {
-        background: #0033a0 !important; /* Deep blue */
+        background: #0051ff !important; /* Deep blue */
         color: #fff !important;
         text-align: center;
         padding: 20px;
@@ -91,7 +91,7 @@
       /* 9. Hover Effects */
       .candidate-option:hover {
         box-shadow: 0 0 16px 4px #e3e8fa;
-        border-color: #0033a0 !important;
+        border-color: #ffffff !important;
         background: #c5d2f2 !important;
       }
       .selection-button {
@@ -214,13 +214,13 @@
       .candidates-container {
         display: grid;
         grid-template-columns: 1fr 1fr; /* Two columns side by side */
-        gap: 32px;
+        gap: 12px; /* Reduced from 32px */
         width: 100%;
       }
 
       .candidate-option {
-        background: linear-gradient(135deg, #fbbf24 0%, #6ee7b7 100%);
-        border: 2px solid #4f8cff;
+        background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+        border: 2px solid #ffffff;
         box-shadow: 0 4px 16px rgba(79, 140, 255, 0.15);
         padding: 32px 24px;
         display: flex;
@@ -232,13 +232,13 @@
 
       .candidate-option:hover {
         transform: scale(1.03);
-        box-shadow: 0 8px 24px rgba(79, 140, 255, 0.25);
+        box-shadow: 0 8px 24px rgb(255, 255, 255);
       }
 
       .candidate-logo {
         width: 200px;
         height: 200px;
-        background: #5a7bd4;
+        background: #ffffff;
         color: white;
         display: flex;
         align-items: center;
@@ -258,22 +258,8 @@
 
       .voting-controls {
         display: flex;
-        flex-direction: row;
         align-items: center;
-        gap: 8px;
-        justify-content: flex-end;
-      }
-
-      .indicator-light {
-        order: 1;
-        margin-right: 0;
-        margin-left: 0;
-      }
-
-      .selection-button {
-        order: 2;
-        margin-left: 0;
-        margin-right: 0;
+        gap: 15px;
       }
 
       .selection-button {
@@ -401,53 +387,11 @@
         cursor: pointer;
         transition: background-color 0.2s ease;
       }
-
       .submit-button:hover {
         background: #2d5a85;
       }
-
       .submit-button:disabled {
         background: #999;
-        cursor: not-allowed;
-      }
-
-      .back-button {
-        background: #e3e8fa;
-        color: #003366;
-        border: 1px solid #0033a0;
-        border-radius: 8px;
-        padding: 12px 30px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        margin-right: 10px;
-        transition: background 0.2s, color 0.2s;
-      }
-      .back-button:hover {
-        background: #0033a0;
-        color: #fff;
-      }
-
-      .next-button {
-        background: #e3e8fa;
-        color: #003366;
-        border: 1px solid #0033a0;
-        border-radius: 8px;
-        padding: 12px 30px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        margin-left: 10px;
-        transition: background 0.2s, color 0.2s;
-      }
-      .next-button:hover:enabled {
-        background: #0033a0;
-        color: #fff;
-      }
-      .next-button:disabled {
-        background: #f0f4ff;
-        color: #b0b8c9;
-        border-color: #b0b8c9;
         cursor: not-allowed;
       }
 
@@ -510,7 +454,6 @@
           gap: 6px;
           margin-left: 0;
           flex-shrink: 0;
-          justify-content: flex-end;
         }
         .selection-button {
           min-width: 44px;
@@ -625,7 +568,6 @@
     gap: 4px;
     margin-left: 0;
     flex-shrink: 0;
-    justify-content: flex-end;
   }
   .selection-button {
     min-width: 30px;
@@ -747,168 +689,12 @@
 
 @media (max-width: 600px) {
   .candidates-container {
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
+    gap: 4px !important;
   }
   .candidate-option {
-    min-width: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
-    padding: 10px 4px !important;
-    gap: 8px !important;
+    gap: 4px !important;
+    margin-bottom: 4px !important;
   }
-  .candidate-logo {
-    width: 36px !important;
-    height: 36px !important;
-    font-size: 13px !important;
-    border-radius: 7px !important;
-    margin-right: 8px !important;
-    flex-shrink: 0 !important;
-  }
-  .candidate-name {
-    font-size: 13px !important;
-    flex: 1 1 0 !important;
-    min-width: 0 !important;
-    margin-right: 6px !important;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .voting-controls {
-    flex-shrink: 0 !important;
-    gap: 5px !important;
-  }
-  .selection-button {
-    min-width: 32px !important;
-    min-height: 22px !important;
-    font-size: 0.9rem !important;
-    padding: 0 4px !important;
-    border-radius: 10px !important;
-    box-sizing: border-box !important;
-  }
-  .indicator-light {
-    width: 12px !important;
-    height: 12px !important;
-    flex-shrink: 0 !important;
-  }
-}
-/* --- Selection Button Expansion and Punchhole Effect --- */
-.voting-controls {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  justify-content: flex-end;
-}
-
-.indicator-light {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #eee;
-  border: 2px solid #bbb;
-  margin-right: 0;
-  margin-left: 0;
-  position: relative;
-  z-index: 4;
-  transition: background 0.2s, border 0.2s;
-}
-
-.candidate-option.selected .indicator-light {
-  background: #00b86b;
-  border-color: #00b86b;
-}
-
-.selection-button {
-  position: relative;
-  overflow: visible;
-  min-width: 36px;
-  height: 32px;
-  font-size: 0.95rem;
-  border-radius: 16px;
-  border: none;
-  background: #e3e8fa;
-  color: #0033a0;
-  cursor: pointer;
-  transition: width 0.35s cubic-bezier(.7,1.7,.5,1), background 0.2s, color 0.2s;
-  z-index: 2;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-}
-
-/* Expanded state for selection button */
-.candidate-option.selected .selection-button {
-  width: 150px !important;
-  min-width: 150px !important;
-  background: #00b86b !important;
-  color: #fff !important;
-  box-shadow: 0 0 12px 2px #b6f5d8;
-  transition: width 0.35s cubic-bezier(.7,1.7,.5,1), background 0.2s;
-  justify-content: flex-start;
-  padding-left: 38px;
-}
-
-/* Punchhole effect for indicator light */
-.candidate-option.selected .selection-button::before {
-  content: "";
-  position: absolute;
-  left: -30px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
-  background: white;
-  border-radius: 50%;
-  z-index: 3;
-  box-shadow: 0 0 0 2px #00b86b;
-  pointer-events: none;
-}
-
-/* Outward arrow on left */
-.candidate-option.selected .selection-button::after {
-  content: "";
-  position: absolute;
-  left: -46px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-top: 16px solid transparent;
-  border-bottom: 16px solid transparent;
-  border-right: 18px solid #00b86b;
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Show "Vote" text and arrow only when selected */
-.selection-button .vote-label,
-.selection-button .vote-arrow {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.candidate-option.selected .selection-button .vote-label,
-.candidate-option.selected .selection-button .vote-arrow {
-  display: inline-block;
-  opacity: 1;
-  transition: opacity 0.2s 0.15s;
-}
-
-.vote-label {
-  margin-right: 10px;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-
-.vote-arrow {
-  margin-left: 10px;
-  font-size: 1.2em;
-  font-weight: bold;
 }
     </style>
   </head>
@@ -934,120 +720,80 @@
               <div class="candidate-logo">A1</div>
               <div class="candidate-name">BSPL Candidate 1</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="bspl2">
               <div class="candidate-logo">A2</div>
               <div class="candidate-name">BSPL Candidate 2</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="bspl3">
               <div class="candidate-logo">A3</div>
               <div class="candidate-name">BSPL Candidate 3</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="bspl4">
               <div class="candidate-logo">A4</div>
               <div class="candidate-name">BSPL Candidate 4</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="bspl5">
               <div class="candidate-logo">A5</div>
               <div class="candidate-name">BSPL Candidate 5</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="bspl6">
               <div class="candidate-logo">A6</div>
               <div class="candidate-name">BSPL Candidate 6</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="bspl7">
               <div class="candidate-logo">A7</div>
               <div class="candidate-name">BSPL Candidate 7</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="bspl8">
               <div class="candidate-logo">A8</div>
               <div class="candidate-name">BSPL Candidate 8</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="bspl9">
               <div class="candidate-logo">A9</div>
               <div class="candidate-name">BSPL Candidate 9</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="bspl10">
               <div class="candidate-logo">A10</div>
               <div class="candidate-name">BSPL Candidate 10</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
           </div>
@@ -1075,120 +821,80 @@
               <div class="candidate-logo">B1</div>
               <div class="candidate-name">BASPL Candidate 1</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="baspl2">
               <div class="candidate-logo">B2</div>
               <div class="candidate-name">BASPL Candidate 2</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="baspl3">
               <div class="candidate-logo">B3</div>
               <div class="candidate-name">BASPL Candidate 3</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="baspl4">
               <div class="candidate-logo">B4</div>
               <div class="candidate-name">BASPL Candidate 4</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="baspl5">
               <div class="candidate-logo">B5</div>
               <div class="candidate-name">BASPL Candidate 5</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="baspl6">
               <div class="candidate-logo">B6</div>
               <div class="candidate-name">BASPL Candidate 6</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="baspl7">
               <div class="candidate-logo">B7</div>
               <div class="candidate-name">BASPL Candidate 7</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="baspl8">
               <div class="candidate-logo">B8</div>
               <div class="candidate-name">BASPL Candidate 8</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="baspl9">
               <div class="candidate-logo">B9</div>
               <div class="candidate-name">BASPL Candidate 9</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="baspl10">
               <div class="candidate-logo">B10</div>
               <div class="candidate-name">BASPL Candidate 10</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
           </div>
@@ -1216,120 +922,80 @@
               <div class="candidate-logo">C1</div>
               <div class="candidate-name">GSPL Candidate 1</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gspl2">
               <div class="candidate-logo">C2</div>
               <div class="candidate-name">GSPL Candidate 2</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gspl3">
               <div class="candidate-logo">C3</div>
               <div class="candidate-name">GSPL Candidate 3</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gspl4">
               <div class="candidate-logo">C4</div>
               <div class="candidate-name">GSPL Candidate 4</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gspl5">
               <div class="candidate-logo">C5</div>
               <div class="candidate-name">GSPL Candidate 5</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gspl6">
               <div class="candidate-logo">C6</div>
               <div class="candidate-name">GSPL Candidate 6</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gspl7">
               <div class="candidate-logo">C7</div>
               <div class="candidate-name">GSPL Candidate 7</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gspl8">
               <div class="candidate-logo">C8</div>
               <div class="candidate-name">GSPL Candidate 8</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gspl9">
               <div class="candidate-logo">C9</div>
               <div class="candidate-name">GSPL Candidate 9</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gspl10">
               <div class="candidate-logo">C10</div>
               <div class="candidate-name">GSPL Candidate 10</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
           </div>
@@ -1357,120 +1023,80 @@
               <div class="candidate-logo">D1</div>
               <div class="candidate-name">GASPL Candidate 1</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gaspl2">
               <div class="candidate-logo">D2</div>
               <div class="candidate-name">GASPL Candidate 2</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gaspl3">
               <div class="candidate-logo">D3</div>
               <div class="candidate-name">GASPL Candidate 3</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gaspl4">
               <div class="candidate-logo">D4</div>
               <div class="candidate-name">GASPL Candidate 4</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gaspl5">
               <div class="candidate-logo">D5</div>
               <div class="candidate-name">GASPL Candidate 5</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gaspl6">
               <div class="candidate-logo">D6</div>
               <div class="candidate-name">GASPL Candidate 6</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gaspl7">
               <div class="candidate-logo">D7</div>
               <div class="candidate-name">GASPL Candidate 7</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gaspl8">
               <div class="candidate-logo">D8</div>
               <div class="candidate-name">GASPL Candidate 8</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gaspl9">
               <div class="candidate-logo">D9</div>
               <div class="candidate-name">GASPL Candidate 9</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
             <div class="candidate-option" data-candidate="gaspl10">
               <div class="candidate-logo">D10</div>
               <div class="candidate-name">GASPL Candidate 10</div>
               <div class="voting-controls">
+                <button class="selection-button"></button>
                 <div class="indicator-light"></div>
-                <button class="selection-button">
-                  <span class="vote-label">Vote</span>
-                  Select
-                  <span class="vote-arrow">&#8592;</span>
-                </button>
               </div>
             </div>
           </div>
@@ -1488,118 +1114,41 @@
     </div>
 
     <!-- Designer Thank You Popup -->
-<div id="thankyou-popup" style="display:none;">
-  <div class="popup-overlay"></div>
-  <div class="popup-content">
-    <h2>Thank You for Voting!</h2>
-    <!-- <p>Your ballot has been securely submitted.<br>We appreciate your participation.</p> -->
-    <h3>Congrats! Your Vote Counted towards something special.</h3>
-    <div id="vote-summary" class="vote-summary"></div>
-    <button class="popup-btn" onclick="window.location.href='/ballot/welcome'">You're Welcome</button>
+<div id="thankyou-popup" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.35); z-index:9999; align-items:center; justify-content:center;">
+  <div class="popup-content" style="background:#fff; border-radius:18px; padding:40px 32px; box-shadow:0 8px 32px #0002; min-width:320px; max-width:90vw; display:flex; flex-direction:column; align-items:center;">
+    <h2 style="color:#00b86b; margin-bottom:24px;">Your Vote has been counted</h2>
+    <div class="progress-bar-container" style="width:340px; max-width:90vw; margin-bottom:24px;">
+      <div class="progress-bar-fill" id="progress-bar-fill"></div>
+    </div>
+    <button class="popup-btn" onclick="document.getElementById('thankyou-popup').style.display='none';" style="margin-top:12px; padding:10px 28px; border:none; background:#00b86b; color:#fff; border-radius:8px; font-size:1rem; cursor:pointer;">Close</button>
   </div>
 </div>
 
 <style>
-/* Designer Thank You Popup Styles */
-#thankyou-popup {
-  position: fixed;
-  z-index: 9999;
-  inset: 0;
+.progress-bar-container {
+  width: 340px;
+  height: 48px;
+  background: #e6f7ee;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 1px 10px rgba(0,0,0,0.06);
+  border: 2px solid #b6f5d8;
   display: flex;
   align-items: center;
-  justify-content: center;
-  animation: popupFadeIn 0.5s;
 }
-#thankyou-popup .popup-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(32, 32, 32, 0.18);
-  /* Removed blur effects */
-  /* backdrop-filter: blur(4px); */
-  /* -webkit-backdrop-filter: blur(4px); */
-  opacity: 0;
-  transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1);
-}
-#thankyou-popup .popup-content {
-  position: relative;
-  z-index: 2;
-  background: #fff;
-  border-radius: 22px;
-  box-shadow: 0 8px 40px 0 rgba(0,0,0,0.13), 0 1.5px 8px 0 rgba(0,0,0,0.08);
-  padding: 44px 32px 32px 32px;
-  max-width: 370px;
-  width: 92vw;
-  text-align: center;
-  animation: popupSlideUp 0.6s cubic-bezier(.23,1.01,.32,1);
-  transition: box-shadow 0.3s;
-}
-#thankyou-popup h2 {
-  font-size: 2rem;
-  color: #222;
-  margin-bottom: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-#thankyou-popup p {
-  color: #444;
-  font-size: 1.08rem;
-  margin-bottom: 22px;
-}
-.vote-summary {
-  background: #f7f7fa;
-  border-radius: 12px;
-  padding: 18px 12px 12px 12px;
-  margin-bottom: 28px;
-  font-size: 1.05rem;
-  color: #222;
-  text-align: center;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-}
-.vote-summary ul {
-  margin: 0;
-  padding: 0 0 0 18px;
-  list-style: none;
-}
-.popup-btn {
-  background: #0033a0;
-  color: #fff;
-  border: none;
-  border-radius: 24px;
-  padding: 14px 38px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  box-shadow: 0 2px 12px rgba(0,51,160,0.10);
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  outline: none;
-}
-.popup-btn:hover, .popup-btn:focus {
-  background: #0056d6;
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 4px 18px rgba(0,51,160,0.13);
-}
-@keyframes popupFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes popupSlideUp {
-  from { transform: translateY(80px) scale(0.97); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00b86b 60%, #4ade80 100%);
+  border-radius: 24px 0 0 24px;
+  transition: width 1.2s cubic-bezier(.23,1.01,.32,1);
+  box-shadow: 0 0 12px #00b86b44;
 }
 @media (max-width: 500px) {
-  #thankyou-popup .popup-content {
-    padding: 24px 6vw 18px 6vw;
-    max-width: 98vw;
+  .progress-bar-container {
+    width: 90vw;
+    min-width: 0;
   }
-  .vote-summary {
-    font-size: 0.98rem;
-    padding: 12px 6px 8px 8px;
-  }
-}
-/* Increase popup width */
-.popup {
-  width: 600px; /* Adjust as needed */
-  max-width: 90vw; /* Optional: responsive max width */
 }
 </style>
 
@@ -1719,23 +1268,14 @@ function getCookie(name) {
       // Submit logic for each step (no disabling, just go to next step)
       function submitVote(step) {
   if (!selections[step]) {
-    // No alert, just return
     return;
   }
   if (step === "gaspl") {
-    // Last step: Show thank you popup with summary
     for (step in uuid) {
       voteForCandidate(uuid[step]);
     }
-    // Build summary HTML
-    const summaryList = Object.entries(selections)
-      .map(([race, name]) => `<li>${race.toUpperCase()} ${name ? name : "<em>None</em>"}</li>`)
-      .join("");
-    document.getElementById("vote-summary").innerHTML =
-      `<div style="margin-bottom:8px;font-weight:600;">Your Votes:</div><ul>${summaryList}</ul>`;
-    // Show popup
+    // Show the popup with progress bar and message
     document.getElementById("thankyou-popup").style.display = "flex";
-    // Optionally disable all selections now
     document.querySelectorAll(".candidate-option").forEach((option) => {
       option.style.pointerEvents = "none";
       option.style.opacity = "0.7";
@@ -1744,8 +1284,12 @@ function getCookie(name) {
       btn.disabled = true;
       btn.textContent = "BALLOT SUBMITTED";
     });
+
+    // Animate the progress bar to a small visible amount (e.g., 5%)
+    setTimeout(() => {
+      document.getElementById("progress-bar-fill").style.width = "5%";
+    }, 200);
   } else {
-    // Not last step: just go to next step
     const idx = steps.indexOf(step);
     showStep(steps[idx + 1]);
   }
@@ -1773,14 +1317,6 @@ function getCookie(name) {
 
       // Initialize: show first step
       showStep("bspl");
-
-      // Ensure "Vote" and arrow are hidden by default and shown only when selected
-document.querySelectorAll(".selection-button").forEach((btn) => {
-  // Add label and arrow spans if not present
-  if (!btn.querySelector(".vote-label")) {
-    btn.innerHTML = `<span class="vote-label">Vote</span>${btn.innerHTML}<span class="vote-arrow">&#8592;</span>`;
-  }
-});
     </script>
   </body>
 </html>
