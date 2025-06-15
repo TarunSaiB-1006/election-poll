@@ -9,9 +9,10 @@
 
       /* 1. Header (Top Bar) */
 .ballot-header {
-  background: #0033a0 !important; /* Deep blue */
-  color: #fff !important;
+  background: #ff0000 !important; /* Deep blue */
+  color: #000000 !important;
   text-align: center;
+  font: bold 2rem 
   padding: 20px;
 }
 
@@ -28,14 +29,14 @@ body {
 
   background: #e3e8fa !important; /* Light blue */ 
   border: none !important; /* Remove border */
-  color: #003366 !important; /* Dark blue text */
+  color: #ffffff !important; /* Dark blue text */
   border-radius: 20px;
   box-shadow: 0 4px 16px rgba(51, 51, 102, 0.10);
-  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+  transition: none !important;
   display: flex;
   align-items: center;
   gap: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 0; /* Remove extra space below each option */
   box-sizing: border-box;
 }
 
@@ -58,7 +59,7 @@ body {
 
 /* 7. “Submit Ballot” Button */
 .submit-button {
-  background: #0033a0 !important; /* Blue */
+  background: #a9bfef !important; /* Blue */
   color: #fff !important;
   border: none;
   border-radius: 8px;
@@ -80,15 +81,13 @@ body {
   min-height: 900px;
   margin: 0 auto;
   background: #fff;
-  border: 2px solid #0033a0 !important;
+  border: 2px solid #ffffff !important;
   border-radius: 20px;
 }
 
 /* 9. Hover Effects */
 .candidate-option:hover {
-  box-shadow: 0 0 16px 4px #e3e8fa;
-  border-color: #0033a0 !important;
-  background: #c5d2f2 !important;
+  /* No hover effect */
 }
 .selection-button {
   height: 100%;
@@ -101,7 +100,7 @@ body {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background: #0033a0 !important;
+  background: #0015ff !important;
   color: #fff !important;
   border: none;
   cursor: pointer;
@@ -210,7 +209,7 @@ body {
    .candidates-container {
   display: grid;
   grid-template-columns: 1fr 1fr; /* Two columns side by side */
-  gap: 32px;
+  gap: 8px; /* Reduce gap to bring candidate options closer */
   width: 100%;
    }
    
