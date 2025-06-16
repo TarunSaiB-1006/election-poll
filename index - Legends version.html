@@ -4,887 +4,378 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title></title>
-    <!-- Add Google Fonts Chivo -->
     <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-      :root {
-  --background-main: #1d4bd4;
-  --background-container: #23262f;
-  --border-main: #2d313d;
-  --border-strong: #35394a;
-  --text-main: #e0e3ea;
-  --text-secondary: #c7c9d3;
-  --text-heading: #f3f6fa;
-  --button-gradient-start: #4f3dc1;
-  --button-gradient-end: #00d2ff;
-  --button-shadow: #1a1d23;
-  --button-hover-shadow: #00d2ff44;
-  --progress-bar-bg: #23262f;
-  --progress-bar-border: #35394a;
-  --progress-bar-gradient-start: #00c6fb;
-  --progress-bar-gradient-end: #005bea;
-  --progress-bar-shadow: #00c6fb66;
-  --candidate-selected-bg: #1a1d23;
-  --indicator-bg: #00d2ff;
-  --indicator-shadow: #00d2ff;
-  --indicator-shadow2: #00d2ff;
-  --popup-bg: rgba(24,26,32,0.85);
+:root {
+  /* Main color scheme */
+  --color-bg-main: #181a20;
+  --color-bg-container: #23262f;
+  --color-bg-section: #232c3b;
+  --color-bg-candidate: #232c3b;
+  --color-bg-candidate-hover: #26313f;
+  --color-bg-candidate-selected: #1a222e;
+  --color-bg-header: #23262f;
+  --color-bg-header-gradient: linear-gradient(90deg, #23262f 60%, #00b86b 100%);
+  --color-bg-logo: #00b86b;
+  --color-bg-logo-light: #e3e8fa;
+  --color-bg-progress: #e6f7ee;
+  --color-bg-popup: rgba(24,26,32,0.85);
+  --color-bg-overlay: rgba(0, 184, 107, 0.92);
+
+  --color-border-main: #00b86b;
+  --color-border-strong: #00b86b;
+  --color-border-candidate: #232c3b;
+  --color-border-candidate-hover: #00b86b;
+  --color-border-candidate-selected: #00b86b;
+  --color-border-logo: #00b86b;
+  --color-border-progress: #b6f5d8;
+  --color-border-indicator: #ccc;
+  --color-border-indicator-active: #fff;
+
+  --color-text-main: #f5f7fa;
+  --color-text-secondary: #b6c3e0;
+  --color-text-heading: #fff;
+  --color-text-subtle: #666;
+  --color-text-candidate: #f5f7fa;
+  --color-text-candidate-dark: #003366;
+  --color-text-logo: #181a20;
+  --color-text-logo-light: #fff;
+  --color-text-btn: #fff;
+  --color-text-btn-hover: #fff;
+  --color-text-btn-disabled: #999;
+  --color-text-popup: #f5f7fa;
+  --color-text-popup-title: #00b86b;
+
+  --color-btn-bg: #00b86b;
+  --color-btn-bg-hover: #2d5a85;
+  --color-btn-bg-disabled: #999;
+  --color-btn-shadow: #00b86b55;
+  --color-btn-shadow-hover: #00b86b99;
+
+  --color-indicator-bg: #b80000;
+  --color-indicator-bg-active: #b80000; 
+  --color-indicator-shadow: #b8000055;
+  --color-indicator-shadow-active: #b80000cc;
+
+  --color-progress-gradient: linear-gradient(90deg, #00b86b 60%, #4ade80 100%);
+  --color-progress-shadow: #00b86b44;
+
+  --color-shadow-container: #000a;
+  --color-shadow-header: #0008;
+  --color-shadow-candidate: #000a;
+  --color-shadow-logo: #000a;
+  --color-shadow-progress: rgba(0,0,0,0.08);
+
+  --color-section-bg: #232c3b;
+  --color-section-border: #00b86b;
+  --color-section-title: #fff;
+  --color-section-subtitle: #b6c3e0;
+  --color-indicator-center: #b80000;
 }
 
-      body, html {
-  background: var(--background-main);
-  color: var(--text-main);
+/* General styles */
+html, body {
+  background: var(--color-bg-main) !important;
+  color: var(--color-text-main) !important;
+  font-family: 'Chivo', Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
 }
 
 .ballot-container, .ballot-page {
-  background: var(--background-container) !important;
+  background: var(--color-bg-container) !important;
   border-radius: 24px;
-  box-shadow: 0 2px 32px rgba(0,0,0,0.45);
-  border: 1.5px solid var(--border-main);
+  box-shadow: 0 2px 32px var(--color-shadow-container);
+  border: 2px solid var(--color-border-main) !important;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-heading);
-  letter-spacing: 1px;
+.ballot-header {
+  background: var(--color-bg-header-gradient) !important;
+  color: var(--color-text-heading) !important;
+  text-align: center;
+  padding: 20px;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 2px 12px var(--color-shadow-header);
 }
 
-p, label, .candidate-option {
-  color: var(--text-secondary);
-}
-
-.submit-button, button {
-  background: linear-gradient(90deg, var(--button-gradient-start) 0%, var(--button-gradient-end) 100%);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  padding: 14px 36px;
-  font-size: 1.1rem;
+.ballot-title {
+  font-size: 32px;
   font-weight: bold;
-  box-shadow: 0 2px 12px var(--button-shadow);
+  margin: 0 0 8px 0;
+  letter-spacing: 2px;
+  color: var(--color-text-heading) !important;
+  text-shadow: 0 2px 8px #000c;
+}
+
+.election-info,
+.voting-instruction {
+  color: var(--color-text-secondary) !important;
+}
+
+.instructions-section {
+  background: var(--color-section-bg) !important;
+  color: var(--color-text-main) !important;
+  border-bottom: 1px solid var(--color-section-border);
+}
+
+.instructions-title {
+  color: var(--color-section-title) !important;
+}
+
+.instructions-text {
+  color: var(--color-text-main) !important;
+}
+
+.race-section {
+  padding: 20px;
+}
+
+.race-header {
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--color-section-border);
+  padding-bottom: 10px;
+}
+
+.race-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+  color: var(--color-section-title) !important;
+}
+
+.race-subtitle {
+  color: var(--color-section-subtitle) !important;
+}
+
+.candidates-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.candidate-option {
+  background: var(--color-bg-candidate) !important;
+  border: 2px solid var(--color-border-candidate) !important;
+  color: var(--color-text-candidate) !important;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px var(--color-shadow-candidate);
+  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  min-height: 240px;
+  padding: 48px 40px;
+  font-size: 1.5rem;
+}
+
+.candidate-option:hover {
+  box-shadow: 0 0 16px 4px var(--color-btn-shadow-hover);
+  border-color: var(--color-border-candidate-hover) !important;
+  background: var(--color-bg-candidate-hover) !important;
+}
+
+.candidate-option.selected {
+  border: 2px solid var(--color-border-candidate-selected) !important;
+  background: var(--color-bg-candidate-selected) !important;
+  box-shadow: 0 0 24px 2px var(--color-indicator-shadow-active);
+}
+
+.candidate-logo {
+  width: 80px;
+  height: 80px;
+  background: var(--color-bg-logo) !important;
+  color: var(--color-text-logo) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  flex-shrink: 0;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px var(--color-shadow-logo);
+}
+
+.candidate-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--color-text-candidate) !important;
+  flex-grow: 1;
+}
+
+.voting-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-direction: row;
+  position: relative;
+}
+
+.indicator-light {
+  width: 35px;
+  height: 35px;
+  background: var(--color-indicator-bg);
+  border: 2px solid var(--color-border-indicator) !important;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 2px 6px var(--color-indicator-shadow);
+  order: 0;
+  cursor: not-allowed;
+}
+
+.candidate-option.ready-to-vote .indicator-light {
+  cursor: pointer;
+  border-color: var(--color-border-main) !important;
+  box-shadow: 0 0 8px var(--color-indicator-shadow);
+}
+
+.candidate-option.selected .indicator-light {
+  background: var(--color-indicator-bg-active);
+  border-color: var(--color-border-indicator-active);
+  box-shadow: 0 0 20px var(--color-indicator-shadow-active), 0 2px 6px var(--color-indicator-shadow);
+  animation: ledPulseDark 2s infinite;
+}
+
+.candidate-option.selected .indicator-light::before {
+  background: var(--color-text-logo-light);
+  box-shadow: 0 1px 2px var(--color-border-progress), 0 -1px 2px var(--color-border-main);
+}
+
+.candidate-option.selected .indicator-light::after {
+  background: radial-gradient(circle at 30% 30%, var(--color-indicator-center), #333);
+  box-shadow: 0 1px 3px var(--color-border-progress), 0 -1px 3px #003a1a, 0 0 15px var(--color-indicator-shadow-active), 0 0 25px #00b86b66;
+}
+
+@keyframes ledPulseDark {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--color-indicator-shadow), 0 2px 6px var(--color-indicator-shadow);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--color-indicator-shadow-active), 0 0 40px #00b86b66, 0 2px 6px var(--color-indicator-shadow);
+  }
+}
+
+.selection-button {
+  background: var(--color-btn-bg) !important;
+  color: var(--color-text-btn) !important;
+  border: none;
+  border-radius: 35px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 3px 10px var(--color-btn-shadow);
+  flex-shrink: 0;
+  font-size: 2rem;
+  order: 1;
+  padding: 0 32px;
+  min-width: 160px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.selection-button:hover,
+.candidate-option.selected .selection-button {
+  background: var(--color-btn-bg-hover) !important;
+  color: var(--color-text-btn-hover) !important;
+  box-shadow: 0 0 12px 2px var(--color-btn-shadow-hover);
+}
+
+.submit-section {
+  padding: 30px;
+  text-align: center;
+  border-top: 1px solid var(--color-section-border);
+  background: var(--color-bg-container) !important;
+}
+
+.submit-button {
+  background: var(--color-btn-bg);
+  color: var(--color-text-btn);
+  border: none;
+  border-radius: 8px;
+  padding: 16px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--color-btn-shadow);
   transition: background 0.2s, box-shadow 0.2s;
   margin-top: 16px;
-  cursor: pointer;
 }
-.submit-button:hover, button:hover {
-  background: linear-gradient(90deg, var(--button-gradient-end) 0%, var(--button-gradient-start) 100%);
-  box-shadow: 0 4px 24px var(--button-hover-shadow);
+
+.submit-button:hover {
+  background: var(--color-btn-bg-hover);
+  color: var(--color-text-btn-hover);
+  box-shadow: 0 0 12px 2px var(--color-btn-shadow-hover);
+}
+
+.submit-button:disabled {
+  background: var(--color-btn-bg-disabled);
+  color: var(--color-text-btn-disabled);
+  cursor: not-allowed;
+}
+
+#thankyou-popup {
+  background: var(--color-bg-popup) !important;
+}
+
+#thankyou-popup .popup-content {
+  background: var(--color-bg-container) !important;
+  color: var(--color-text-popup) !important;
+  box-shadow: 0 8px 32px var(--color-shadow-container) !important;
+}
+
+#thankyou-popup h2 {
+  color: var(--color-text-popup-title) !important;
+}
+
+#thankyou-popup .popup-btn {
+  background: var(--color-btn-bg) !important;
+  color: var(--color-text-btn) !important;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 10px 28px;
+  margin-top: 12px;
 }
 
 .progress-bar-container {
   width: 600px;
   height: 96px;
-  background: var(--progress-bar-bg);
+  background: var(--color-bg-progress);
   border-radius: 48px;
   overflow: hidden;
-  box-shadow: 0 1px 24px #10121a;
-  border: 3px solid var(--progress-bar-border);
+  box-shadow: 0 1px 16px var(--color-shadow-progress);
+  border: 3px solid var(--color-border-progress);
   display: flex;
   align-items: center;
   margin: 0 auto;
 }
+
 .progress-bar-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--progress-bar-gradient-start) 60%, var(--progress-bar-gradient-end) 100%);
+  background: var(--color-progress-gradient);
   border-radius: 48px 0 0 48px;
   transition: width 1.2s cubic-bezier(.23,1.01,.32,1);
-  box-shadow: 0 0 24px var(--progress-bar-shadow);
+  box-shadow: 0 0 16px var(--color-progress-shadow);
   font-size: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--color-text-btn);
   font-weight: bold;
 }
 
-.candidate-option {
-  background: var(--background-container);
-  border: 2px solid var(--border-strong);
-  border-radius: 16px;
-  color: var(--text-main);
-  padding: 18px 28px;
-  margin: 12px 0;
-  transition: border 0.2s, background 0.2s;
-  cursor: pointer;
-}
-.candidate-option.selected, .candidate-option:hover {
-  border: 2px solid var(--button-gradient-end);
-  background: var(--candidate-selected-bg);
-  color: #fff;
-}
-
-input, select {
-  background: var(--background-container);
-  color: var(--text-main);
-  border: 1.5px solid var(--border-strong);
-  border-radius: 8px;
-  padding: 8px 12px;
-  margin: 6px 0;
-}
-
-.indicator-light {
-  width: 36px;
-  height: 36px;
-  background: var(--indicator-bg);
-  border-radius: 50%;
-  box-shadow: 0 0 24px var(--indicator-shadow), 0 0 8px var(--indicator-shadow2);
-  border: none;
-  display: inline-block;
-}
-
-#thankyou-popup {
-  background: var(--popup-bg) !important;
-}
-
-      /* --- BLUE & RED COLOR SCHEME --- */
-
-      /* 1. Header (Top Bar) */
-      .ballot-header {
-        background: #0051ff !important; /* Deep blue */
-        color: #fff !important;
-        text-align: center;
-        padding: 20px;
-      }
-
-      /* 2. Background */
-      body {
-        background: #fff !important;
-      }
-
-      /* 3. Candidate Boxes */
-      .candidate-option {
-        min-height: 240px;
-        padding: 48px 40px;
-        font-size: 1.5rem;
-
-        background: #e3e8fa !important; /* Light blue */
-        border: none !important; /* Remove border */
-        color: #003366 !important; /* Dark blue text */
-        border-radius: 20px;
-        box-shadow: 0 4px 16px rgba(51, 51, 102, 0.1);
-        transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
-        display: flex;
-        align-items: center;
-        gap: 40px;
-        margin-bottom: 40px;
-        box-sizing: border-box;
-      }
-
-      /* 4. Candidate Text */
-      .candidate-option .candidate-name,
-      .candidate-option .candidate-details {
-        color: #fff !important;
-        font-weight: bold;
-        font-size: 1.25rem;
-        text-shadow: 0 1px 4px #000a;
-        letter-spacing: 0.5px;
-      }
-
-      /* 5. Toggle Switch (Selected State) */
-      .candidate-option.selected .indicator-light {
-        background: #d32f2f !important; /* Red */
-        border-color: #d32f2f !important;
-        box-shadow: 0 0 8px 2px #d32f2f !important;
-      }
-      .candidate-option.selected .indicator-light::after {
-        background: radial-gradient(
-          circle at 30% 30%,
-          #d32f2f 60%,
-          #a31515 100%
-        ) !important;
-        box-shadow: 0 0 8px 2px #d32f2f !important;
-      }
-
-      /* 7. “Submit Ballot” Button */
-      .submit-button {
-        background: #0033a0 !important; /* Blue */
-        color: #fff !important;
-        border: none;
-        border-radius: 8px;
-        padding: 16px 40px;
-        font-size: 1.2rem;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 2px 8px rgba(0, 51, 160, 0.15);
-        transition: background 0.2s, box-shadow 0.2s;
-      }
-      .submit-button:hover {
-        background: #d32f2f !important; /* Red on hover */
-        box-shadow: 0 0 12px 2px #e3e8fa;
-      }
-
-      /* 8. Borders and Lines */
-      .ballot-container {
-        max-width: 1200px;
-        min-height: 900px;
-        margin: 0 auto;
-        background: #fff;
-        border: 2px solid #0033a0 !important;
-        border-radius: 20px;
-      }
-
-      /* 9. Hover Effects */
-      .candidate-option:hover {
-        box-shadow: 0 0 16px 4px #e3e8fa;
-        border-color: #ffffff !important;
-        background: #c5d2f2 !important;
-      }
-      .selection-button {
-        height: 100%;
-        min-height: 80px;
-        min-width: 160px;
-        font-size: 1.5rem;
-        padding: 0 32px;
-        border-radius: 35px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-        background: #0033a0 !important;
-        color: #fff !important;
-        border: none;
-        cursor: pointer;
-        transition: background 0.2s, box-shadow 0.2s;
-        box-shadow: 0 3px 10px rgba(0, 51, 160, 0.15);
-      }
-
-      /* Green on hover and when selected */
-      .selection-button:hover,
-      .candidate-option.selected .selection-button {
-        background: #00b86b !important;
-        color: #fff !important;
-        box-shadow: 0 0 12px 2px #b6f5d8;
-      }
-
-      /* Remove gradients and non-blue/red colors from candidate-option and ballot-header */
-      .candidate-option,
-      .ballot-header {
-        background-image: none !important;
-      }
-
-      body {
-        font-family: Arial, sans-serif;
-        background: #f5f5f5;
-        margin: 0;
-        padding: 20px;
-      }
-
-      .ballot-container {
-        max-width: 1600px;
-        margin: 0 auto;
-        background: white;
-        border: 2px solid #333;
-      }
-
-      .ballot-header {
-        background: linear-gradient(90deg, #4f8cff, #6ee7b7, #fbbf24);
-        color: #fff;
-        text-align: center;
-        padding: 20px;
-      }
-
-      .ballot-title {
-        font-size: 32px;
-        font-weight: bold;
-        margin: 0 0 8px 0;
-        letter-spacing: 2px;
-      }
-
-      .election-info {
-        font-size: 18px;
-        margin: 0 0 8px 0;
-        font-weight: normal;
-      }
-
-      .voting-instruction {
-        font-size: 14px;
-        margin: 0;
-        font-weight: normal;
-      }
-
-      .instructions-section {
-        background: #e8e8e8;
-        padding: 15px 20px;
-        border-bottom: 1px solid #ccc;
-      }
-
-      .instructions-title {
-        font-size: 16px;
-        font-weight: bold;
-        margin: 0 0 8px 0;
-        color: #333;
-      }
-
-      .instructions-text {
-        font-size: 14px;
-        color: #333;
-        margin: 0;
-        line-height: 1.4;
-      }
-
-      .race-section {
-        padding: 20px;
-      }
-
-      .race-header {
-        text-align: center;
-        margin-bottom: 20px;
-        border-bottom: 2px solid #333;
-        padding-bottom: 10px;
-      }
-
-      .race-title {
-        font-size: 24px;
-        font-weight: bold;
-        margin: 0 0 5px 0;
-        color: #333;
-      }
-
-      .race-subtitle {
-        font-size: 14px;
-        color: #666;
-        margin: 0;
-      }
-
-      .candidates-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Two columns side by side */
-        gap: 12px; /* Reduced from 32px */
-        width: 100%;
-      }
-
-      .candidate-option {
-        background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-        border: 2px solid #ffffff;
-        box-shadow: 0 4px 16px rgba(79, 140, 255, 0.15);
-        padding: 32px 24px;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.2s;
-      }
-
-      .candidate-option:hover {
-        transform: scale(1.03);
-        box-shadow: 0 8px 24px rgb(255, 255, 255);
-      }
-
-      .candidate-logo {
-        width: 200px;
-        height: 200px;
-        background: #ffffff;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 32px;
-        font-weight: bold;
-        flex-shrink: 0;
-        border-radius: 16px;
-      }
-
-      .candidate-name {
-        font-size: 20px;
-        font-weight: bold;
-        color: #333;
-        flex-grow: 1;
-      }
-
-      .voting-controls {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        flex-direction: row; /* Ensure left-to-right order */
-      }
-
-      .indicator-light {
-        width: 35px;
-        height: 35px;
-        background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-        border: 2px solid #ccc !important; /* Use neutral border, not green */
-        border-radius: 50%;
-        transition: all 0.3s ease;
-        flex-shrink: 0;
-        position: relative;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
-          inset 0 -2px 4px rgba(255, 255, 255, 0.1),
-          0 2px 6px rgba(0, 0, 0, 0.2);
-        order: 0;
-      }
-
-      .selection-button {
-        background: linear-gradient(90deg, #4f8cff, #fbbf24);
-        color: #fff;
-        border: none;
-        border-radius: 35px;
-        cursor: pointer;
-        transition: background 0.2s;
-        box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
-        flex-shrink: 0;
-        font-size: 2rem; /* Makes any icon or text inside bigger */
-        order: 1;
-      }
-
-      .selection-button:hover {
-        background: linear-gradient(90deg, #6ee7b7, #4f8cff);
-        color: #222;
-      }
-
-      /* LED housing inner ring */
-      .indicator-light::before {
-        content: "";
-        position: absolute;
-        top: 3px;
-        left: 3px;
-        right: 3px;
-        bottom: 3px;
-        background: #4a4a4a;
-        border-radius: 50%;
-        box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2),
-          inset 0 -1px 2px rgba(0, 0, 0, 0.5);
-      }
-
-      /* LED dome (actual light) */
-      .indicator-light::after {
-        content: "";
-        position: absolute;
-        top: 6px;
-        left: 6px;
-        right: 6px;
-        bottom: 6px;
-        background: radial-gradient(circle at 30% 30%, #666, #333);
-        border-radius: 50%;
-        transition: all 0.3s ease;
-        box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.3),
-          inset 0 -1px 3px rgba(0, 0, 0, 0.7);
-      }
-
-      /* Selected state - glowing red LED */
-      .candidate-option.selected .indicator-light {
-        background: linear-gradient(145deg, #3a1a1a, #2a1212);
-        border-color: #b81212;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
-          inset 0 -2px 4px rgba(255, 100, 100, 0.1),
-          0 0 20px rgba(220, 53, 69, 0.6), 0 2px 6px rgba(0, 0, 0, 0.2);
-        animation: ledPulse 2s infinite;
-      }
-
-      .candidate-option.selected .indicator-light::before {
-        background: #6a2a2a;
-        box-shadow: inset 0 1px 2px rgba(255, 150, 150, 0.3),
-          inset 0 -1px 2px rgba(0, 0, 0, 0.5);
-      }
-
-      .candidate-option.selected .indicator-light::after {
-        background: radial-gradient(
-          circle at 30% 30%,
-          #ff6b6b,
-          #dc3545,
-          #8b0000
-        );
-        box-shadow: inset 0 1px 3px rgba(255, 200, 200, 0.6),
-          inset 0 -1px 3px rgba(139, 0, 0, 0.8), 0 0 15px rgba(220, 53, 69, 0.8),
-          0 0 25px rgba(220, 53, 69, 0.4);
-      }
-
-      @keyframes ledPulse {
-        0%,
-        100% {
-          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
-            inset 0 -2px 4px rgba(255, 100, 100, 0.1),
-            0 0 20px rgba(220, 53, 69, 0.6), 0 2px 6px rgba(0, 0, 0, 0.2);
-        }
-        50% {
-          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
-            inset 0 -2px 4px rgba(255, 100, 100, 0.1),
-            0 0 30px rgba(220, 53, 69, 0.8), 0 0 40px rgba(220, 53, 69, 0.4),
-            0 2px 6px rgba(0, 0, 0, 0.2);
-        }
-      }
-
-      /* Additional highlight on LED dome when lit */
-      .candidate-option.selected .indicator-light:before {
-        box-shadow: inset 0 1px 2px rgba(255, 150, 150, 0.4),
-          inset 0 -1px 2px rgba(0, 0, 0, 0.5), 0 0 10px rgba(220, 53, 69, 0.3);
-      }
-
-      .submit-section {
-        padding: 30px;
-        text-align: center;
-        border-top: 1px solid #ccc;
-      }
-
-      .submit-button {
-        background: rgb(81, 86, 90);
-        color: white;
-        border: none;
-        padding: 12px 30px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-      }
-      .submit-button:hover {
-        background: #2d5a85;
-      }
-      .submit-button:disabled {
-        background: #999;
-        cursor: not-allowed;
-      }
-
-      /* --- DARK MODE BALLOT --- */
-
-      html, body {
-        background: #181a20 !important;
-        color: #f5f7fa !important;
-      }
-
-      .ballot-container {
-        background: #23262f !important;
-        border: 2px solid #00b86b !important;
-        border-radius: 20px;
-        box-shadow: 0 8px 32px #000a;
-      }
-
-      .ballot-header {
-        background: linear-gradient(90deg, #23262f 60%, #00b86b 100%) !important;
-        color: #f5f7fa !important;
-        text-align: center;
-        padding: 20px;
-        border-radius: 20px 20px 0 0;
-        box-shadow: 0 2px 12px #0008;
-      }
-
-      .ballot-title {
-        font-size: 32px;
-        font-weight: bold;
-        margin: 0 0 8px 0;
-        letter-spacing: 2px;
-        color: #fff !important;
-        text-shadow: 0 2px 8px #000c;
-      }
-
-      .election-info,
-      .voting-instruction {
-        color: #b6c3e0 !important;
-      }
-
-      .instructions-section {
-        background: #232c3b !important;
-        color: #f5f7fa !important;
-        border-bottom: 1px solid #00b86b;
-      }
-
-      .instructions-title {
-        color: #fff !important;
-      }
-
-      .race-section {
-        padding: 20px;
-      }
-
-      .race-header {
-        text-align: center;
-        margin-bottom: 20px;
-        border-bottom: 2px solid #00b86b;
-        padding-bottom: 10px;
-      }
-
-      .race-title {
-        font-size: 24px;
-        font-weight: bold;
-        margin: 0 0 5px 0;
-        color: #fff !important;
-      }
-
-      .race-subtitle {
-        color: #b6c3e0 !important;
-      }
-
-      .candidates-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        width: 100%;
-      }
-
-      .candidate-option {
-        background: #232c3b !important;
-        border: 2px solid #232c3b !important;
-        color: #f5f7fa !important;
-        border-radius: 20px;
-        box-shadow: 0 4px 16px #000a;
-        transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
-        display: flex;
-        align-items: center;
-        gap: 40px;
-        margin-bottom: 0;
-        box-sizing: border-box;
-        cursor: pointer;
-      }
-
-      .candidate-option:hover {
-        box-shadow: 0 0 16px 4px #00b86b99;
-        border-color: #00b86b !important;
-        background: #26313f !important;
-      }
-
-      .candidate-option.selected {
-        border: 2px solid #00b86b !important;
-        background: #1a222e !important;
-        box-shadow: 0 0 24px 2px #00b86bcc;
-      }
-
-      .candidate-logo {
-        width: 80px;
-        height: 80px;
-        background: #00b86b !important;
-        color: #181a20 !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 32px;
-        font-weight: bold;
-        flex-shrink: 0;
-        border-radius: 16px;
-        box-shadow: 0 2px 8px #000a;
-      }
-
-      .candidate-name {
-        font-size: 20px;
-        font-weight: bold;
-        color: #f5f7fa !important;
-        flex-grow: 1;
-      }
-
-      .voting-controls {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        flex-direction: row; /* Ensure left-to-right order */
-      }
-
-      .indicator-light {
-        width: 35px;
-        height: 35px;
-        background: #23262f;
-        border: 2px solid #ccc !important; /* Use neutral border, not green */
-        border-radius: 50%;
-        transition: all 0.3s ease;
-        flex-shrink: 0;
-        position: relative;
-        box-shadow: 0 2px 6px #00b86b55;
-        order: 0;
-      }
-
-      .selection-button {
-        background: #00b86b !important;
-        color: #fff !important;
-        border: none;
-        border-radius: 35px;
-        cursor: pointer;
-        transition: background 0.2s, box-shadow 0.2s;
-        box-shadow: 0 3px 10px #00b86b55;
-        flex-shrink: 0;
-        font-size: 2rem;
-        order: 1;
-      }
-
-      .selection-button:hover,
-      .candidate-option.selected .selection-button {
-        background: #2d5a85 !important;
-        color: #fff !important;
-        box-shadow: 0 0 12px 2px #00b86b99;
-      }
-
-      .candidate-option.selected .indicator-light {
-        background: #00b86b;
-        border-color: #fff;
-        box-shadow: 0 0 20px #00b86bcc, 0 2px 6px #00b86b55;
-        animation: ledPulseDark 2s infinite;
-      }
-
-      .candidate-option.selected .indicator-light::before {
-        background: #fff;
-        box-shadow: 0 1px 2px #b6f5d8, 0 -1px 2px #00b86b;
-      }
-
-      .candidate-option.selected .indicator-light::after {
-        background: radial-gradient(circle at 30% 30%, #fff, #00b86b, #26313f);
-        box-shadow: 0 1px 3px #b6f5d8, 0 -1px 3px #003a1a, 0 0 15px #00b86bcc, 0 0 25px #00b86b66;
-      }
-
-      @keyframes ledPulseDark {
-        0%, 100% {
-          box-shadow: 0 0 20px #00b86b99, 0 2px 6px #00b86b55;
-        }
-        50% {
-          box-shadow: 0 0 30px #00b86bcc, 0 0 40px #00b86b66, 0 2px 6px #00b86b55;
-        }
-      }
-
-      /* Popup dark mode */
-      #thankyou-popup .popup-content {
-        background: #23262f !important;
-        color: #f5f7fa !important;
-        box-shadow: 0 8px 32px #000a !important;
-      }
-      #thankyou-popup h2 {
-        color: #00b86b !important;
-      }
-      #thankyou-popup .popup-btn {
-        background: #00b86b !important;
-        color: #fff !important;
-      }
-
-      /* Progress bar dark mode */
-      .progress-bar-container {
-        background: #232c3b !important;
-        border: 2px solid #00b86b !important;
-      }
-      .progress-bar-fill {
-        background: linear-gradient(90deg, #00b86b 60%, #4ade80 100%) !important;
-        box-shadow: 0 0 12px #00b86b44 !important;
-      }
-
-      /* Responsive styles (dark mode tweaks) */
-      @media (max-width: 600px) {
-        .ballot-container {
-          background: #23262f !important;
-          border-radius: 10px;
-          padding: 0 2vw;
-          box-sizing: border-box;
-        }
-        .candidate-option {
-          background: #232c3b !important;
-          border-radius: 8px;
-        }
-        .candidate-logo {
-          background: #00b86b !important;
-        }
-        .submit-section {
-          background: #23262f !important;
-        }
-      }
-      @media (max-width: 430px) {
-        .ballot-container {
-          background: #23262f !important;
-          border-radius: 8px;
-        }
-        .candidate-option {
-          background: #232c3b !important;
-          border-radius: 7px;
-        }
-        .candidate-logo {
-          background: #00b86b !important;
-        }
-      }
-
-      /* Welcome Step Styles */
-      #welcome-step {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        text-align: center;
-        padding: 0 20px;
-      }
-      #welcome-step h1 {
-        font-size: 2.5rem;
-        margin-bottom: 24px;
-        color: #003366;
-      }
-      #welcome-step p {
-        font-size: 1.2rem;
-        margin-bottom: 32px;
-        color: #333;
-      }
-      #welcome-step .submit-button {
-        font-size: 1.3rem;
-        padding: 18px 48px;
-        background: #00b86b;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background 0.2s, transform 0.2s;
-        box-shadow: 0 4px 16px rgba(0, 184, 107, 0.3);
-      }
-      #welcome-step .submit-button:hover {
-        background: #2d5a85;
-        transform: translateY(-2px);
-      }
-
-      .vote-overlay {
-        position: absolute;
-        left: 0; right: 0; top: 0; bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.4s cubic-bezier(.4,1.2,.4,1);
-        font-size: 1.1rem;
-        font-weight: bold;
-        color: #fff;
-        background: rgba(0, 184, 107, 0.92);
-        border-radius: 8px;
-        z-index: 2;
-      }
-      .selection-button.selected + .vote-overlay,
-      .vote-overlay.active {
-        opacity: 1;
-        pointer-events: auto;
-      }
-      /* Make voting-controls relative for overlay positioning */
-      .voting-controls {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        flex-direction: row;
-      }
-      /* Make indicator-light look clickable only when enabled */
-      .indicator-light {
-        border: 2px solid #ccc !important;
-        box-shadow: none !important;
-        cursor: not-allowed;
-        transition: border-color 0.3s;
-      }
-      .candidate-option.ready-to-vote .indicator-light {
-        cursor: pointer;
-        border-color: #00b86b !important;
-        box-shadow: 0 0 8px #00b86b55;
-      }
-
-      .progress-bar-container {
-  width: 600px;   /* Even larger width */
-  height: 96px;   /* Even larger height */
-  background: #e6f7ee;
-  border-radius: 48px;
-  overflow: hidden;
-  box-shadow: 0 1px 16px rgba(0,0,0,0.08);
-  border: 3px solid #b6f5d8;
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-}
-.progress-bar-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #00b86b 60%, #4ade80 100%);
-  border-radius: 48px 0 0 48px;
-  transition: width 1.2s cubic-bezier(.23,1.01,.32,1);
-  box-shadow: 0 0 16px #00b86b44;
-  font-size: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-weight: bold;
-}
 @media (max-width: 700px) {
   .progress-bar-container {
     width: 98vw;
@@ -896,6 +387,122 @@ input, select {
     border-radius: 30px 0 0 30px;
     font-size: 1.3rem;
   }
+}
+
+@media (max-width: 600px) {
+  .ballot-container {
+    border-radius: 10px;
+    padding: 0 2vw;
+    box-sizing: border-box;
+  }
+  .candidate-option {
+    border-radius: 8px;
+  }
+  .candidate-logo {
+    background: var(--color-bg-logo) !important;
+  }
+  .submit-section {
+    background: var(--color-bg-container) !important;
+  }
+}
+@media (max-width: 430px) {
+  .ballot-container {
+    border-radius: 8px;
+  }
+  .candidate-option {
+    border-radius: 7px;
+  }
+  .candidate-logo {
+    background: var(--color-bg-logo) !important;
+  }
+}
+
+/* Welcome Step Styles */
+#welcome-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 0 20px;
+}
+#welcome-step h1 {
+  font-size: 2.5rem;
+  margin-bottom: 24px;
+  color: var(--color-text-candidate-dark);
+}
+#welcome-step p {
+  font-size: 1.2rem;
+  margin-bottom: 32px;
+  color: var(--color-text-subtle);
+}
+#welcome-step .submit-button {
+  font-size: 1.3rem;
+  padding: 18px 48px;
+  background: var(--color-btn-bg);
+  color: var(--color-text-btn);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 4px 16px var(--color-btn-shadow);
+}
+#welcome-step .submit-button:hover {
+  background: var(--color-btn-bg-hover);
+  transform: translateY(-2px);
+}
+
+/* Overlay for voting feedback */
+.vote-overlay {
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(.4,1.2,.4,1);
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-text-btn);
+  background: var(--color-bg-overlay);
+  border-radius: 8px;
+  z-index: 2;
+}
+.selection-button.selected + .vote-overlay,
+.vote-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Indicator LED housing inner ring */
+.indicator-light::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  background: var(--color-indicator-center) !important;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* LED dome (actual light) */
+.indicator-light::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  background: radial-gradient(circle at 30% 30%, #666, #333);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.3),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.7);
 }
     </style>
   </head>
