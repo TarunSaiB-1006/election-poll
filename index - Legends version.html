@@ -3,8 +3,139 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Official Ballot - General Election 2024</title>
+    <title></title>
+    <!-- Add Google Fonts Chivo -->
+    <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700&display=swap" rel="stylesheet">
     <style>
+      :root {
+  --background-main: #1d4bd4;
+  --background-container: #23262f;
+  --border-main: #2d313d;
+  --border-strong: #35394a;
+  --text-main: #e0e3ea;
+  --text-secondary: #c7c9d3;
+  --text-heading: #f3f6fa;
+  --button-gradient-start: #4f3dc1;
+  --button-gradient-end: #00d2ff;
+  --button-shadow: #1a1d23;
+  --button-hover-shadow: #00d2ff44;
+  --progress-bar-bg: #23262f;
+  --progress-bar-border: #35394a;
+  --progress-bar-gradient-start: #00c6fb;
+  --progress-bar-gradient-end: #005bea;
+  --progress-bar-shadow: #00c6fb66;
+  --candidate-selected-bg: #1a1d23;
+  --indicator-bg: #00d2ff;
+  --indicator-shadow: #00d2ff;
+  --indicator-shadow2: #00d2ff;
+  --popup-bg: rgba(24,26,32,0.85);
+}
+
+      body, html {
+  background: var(--background-main);
+  color: var(--text-main);
+}
+
+.ballot-container, .ballot-page {
+  background: var(--background-container) !important;
+  border-radius: 24px;
+  box-shadow: 0 2px 32px rgba(0,0,0,0.45);
+  border: 1.5px solid var(--border-main);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-heading);
+  letter-spacing: 1px;
+}
+
+p, label, .candidate-option {
+  color: var(--text-secondary);
+}
+
+.submit-button, button {
+  background: linear-gradient(90deg, var(--button-gradient-start) 0%, var(--button-gradient-end) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 36px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 12px var(--button-shadow);
+  transition: background 0.2s, box-shadow 0.2s;
+  margin-top: 16px;
+  cursor: pointer;
+}
+.submit-button:hover, button:hover {
+  background: linear-gradient(90deg, var(--button-gradient-end) 0%, var(--button-gradient-start) 100%);
+  box-shadow: 0 4px 24px var(--button-hover-shadow);
+}
+
+.progress-bar-container {
+  width: 600px;
+  height: 96px;
+  background: var(--progress-bar-bg);
+  border-radius: 48px;
+  overflow: hidden;
+  box-shadow: 0 1px 24px #10121a;
+  border: 3px solid var(--progress-bar-border);
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--progress-bar-gradient-start) 60%, var(--progress-bar-gradient-end) 100%);
+  border-radius: 48px 0 0 48px;
+  transition: width 1.2s cubic-bezier(.23,1.01,.32,1);
+  box-shadow: 0 0 24px var(--progress-bar-shadow);
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+}
+
+.candidate-option {
+  background: var(--background-container);
+  border: 2px solid var(--border-strong);
+  border-radius: 16px;
+  color: var(--text-main);
+  padding: 18px 28px;
+  margin: 12px 0;
+  transition: border 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.candidate-option.selected, .candidate-option:hover {
+  border: 2px solid var(--button-gradient-end);
+  background: var(--candidate-selected-bg);
+  color: #fff;
+}
+
+input, select {
+  background: var(--background-container);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 6px 0;
+}
+
+.indicator-light {
+  width: 36px;
+  height: 36px;
+  background: var(--indicator-bg);
+  border-radius: 50%;
+  box-shadow: 0 0 24px var(--indicator-shadow), 0 0 8px var(--indicator-shadow2);
+  border: none;
+  display: inline-block;
+}
+
+#thankyou-popup {
+  background: var(--popup-bg) !important;
+}
+
       /* --- BLUE & RED COLOR SCHEME --- */
 
       /* 1. Header (Top Bar) */
@@ -727,26 +858,65 @@
         border-color: #00b86b !important;
         box-shadow: 0 0 8px #00b86b55;
       }
+
+      .progress-bar-container {
+  width: 600px;   /* Even larger width */
+  height: 96px;   /* Even larger height */
+  background: #e6f7ee;
+  border-radius: 48px;
+  overflow: hidden;
+  box-shadow: 0 1px 16px rgba(0,0,0,0.08);
+  border: 3px solid #b6f5d8;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00b86b 60%, #4ade80 100%);
+  border-radius: 48px 0 0 48px;
+  transition: width 1.2s cubic-bezier(.23,1.01,.32,1);
+  box-shadow: 0 0 16px #00b86b44;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+}
+@media (max-width: 700px) {
+  .progress-bar-container {
+    width: 98vw;
+    min-width: 0;
+    height: 60px;
+    border-radius: 30px;
+  }
+  .progress-bar-fill {
+    border-radius: 30px 0 0 30px;
+    font-size: 1.3rem;
+  }
+}
     </style>
   </head>
   <body>
   {% load static %}
+<!-- Welcome Step -->
 <div class="ballot-container ballot-page" id="welcome-step" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 600px;">
-  <h1 style="font-size: 2.5rem; margin-bottom: 24px;">Welcome to the Election Ballot</h1>
+  <h1 style="font-size: 2.5rem; margin-bottom: 24px;">National Public School General Elections 2025</h1>
   <p style="font-size: 1.2rem; margin-bottom: 32px;">Thank you for participating in the General Election 2024.<br>Please click below to begin voting.</p>
   <button class="submit-button" style="font-size: 1.3rem; padding: 18px 48px;" onclick="showStep('bspl')">Begin Voting</button>
 </div>
 
-  <div class="ballot-container ballot-page" id="page-1" style="display: none;">
-      <div class="ballot-header">
-        <h1 class="ballot-title">OFFICIAL BALLOT</h1>
-        <p class="election-info">General Election 2024</p>
-        <p class="voting-instruction">Mark your choices clearly</p>
-      </div>
+<!-- Main Ballot Pages -->
+<div class="ballot-container ballot-page" id="page-1" style="display: none;">
+  <!-- Header for all ballot steps -->
+  <h1 style="font-size: 2.2rem; margin-bottom: 18px; text-align:center;">National Public School General Elections 2025</h1>
 
-      <!-- Ballot Sections -->
-      <div id="ballot-bspl" class="ballot-step">
-        <div class="race-section">
+  <!-- BSPL Step -->
+  <div id="ballot-bspl" class="ballot-step">
+    <h2 style="font-size: 2rem; margin-bottom: 16px; text-align:center;"></h2>
+    <div class="race-section">
           <div class="race-header">
             <h2 class="race-title">BSPL</h2>
             <p class="race-subtitle">Vote for one (1)</p>
@@ -844,10 +1014,12 @@
             SUBMIT BALLOT
           </button>
         </div>
-      </div>
+  </div>
 
-      <div id="ballot-baspl" class="ballot-step" style="display: none">
-        <div class="race-section">
+  <!-- BASPL Step -->
+  <div id="ballot-baspl" class="ballot-step" style="display: none">
+    <h2 style="font-size: 2rem; margin-bottom: 16px; text-align:center;"></h2>
+    <div class="race-section">
           <div class="race-header">
             <h2 class="race-title">BASPL</h2>
             <p class="race-subtitle">Vote for one (1)</p>
@@ -945,10 +1117,12 @@
             SUBMIT BALLOT
           </button>
         </div>
-      </div>
+  </div>
 
-      <div id="ballot-gspl" class="ballot-step" style="display: none">
-        <div class="race-section">
+  <!-- GSPL Step -->
+  <div id="ballot-gspl" class="ballot-step" style="display: none">
+    <h2 style="font-size: 2rem; margin-bottom: 16px; text-align:center;"></h2>
+    <div class="race-section">
           <div class="race-header">
             <h2 class="race-title">GSPL</h2>
             <p class="race-subtitle">Vote for one (1)</p>
@@ -1046,10 +1220,12 @@
             SUBMIT BALLOT
           </button>
         </div>
-      </div>
+  </div>
 
-      <div id="ballot-gaspl" class="ballot-step" style="display: none">
-        <div class="race-section">
+  <!-- GASPL Step -->
+  <div id="ballot-gaspl" class="ballot-step" style="display: none">
+    <h2 style="font-size: 2rem; margin-bottom: 16px; text-align:center;"></h2>
+    <div class="race-section">
           <div class="race-header">
             <h2 class="race-title">GASPL</h2>
             <p class="race-subtitle">Vote for one (1)</p>
@@ -1155,31 +1331,44 @@
 
 <style>
 .progress-bar-container {
-  width: 340px;
-  height: 48px;
+  width: 600px;   /* Even larger width */
+  height: 96px;   /* Even larger height */
   background: #e6f7ee;
-  border-radius: 24px;
+  border-radius: 48px;
   overflow: hidden;
-  box-shadow: 0 1px 10px rgba(0,0,0,0.06);
-  border: 2px solid #b6f5d8;
+  box-shadow: 0 1px 16px rgba(0,0,0,0.08);
+  border: 3px solid #b6f5d8;
   display: flex;
   align-items: center;
+  margin: 0 auto;
 }
 .progress-bar-fill {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, #00b86b 60%, #4ade80 100%);
-  border-radius: 24px 0 0 24px;
+  border-radius: 48px 0 0 48px;
   transition: width 1.2s cubic-bezier(.23,1.01,.32,1);
-  box-shadow: 0 0 12px #00b86b44;
+  box-shadow: 0 0 16px #00b86b44;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
 }
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   .progress-bar-container {
-    width: 90vw;
+    width: 98vw;
     min-width: 0;
+    height: 60px;
+    border-radius: 30px;
+  }
+  .progress-bar-fill {
+    border-radius: 30px 0 0 30px;
+    font-size: 1.3rem;
   }
 }
-</style>
+    </style>
 
     <script>
 function setupCandidateOptionEvents() {
@@ -1216,7 +1405,7 @@ function setupCandidateOptionEvents() {
         selections[stepId] = option.getAttribute('data-candidate');
         if (stepId === "gaspl") {
           // Show thank you popup with progress bar
-          showThankYouPopup();
+          showThankYouPopup(75, false); // 75% progress, no label
         } else {
           submitVote(stepId);
         }
@@ -1225,14 +1414,23 @@ function setupCandidateOptionEvents() {
   });
 }
 
-// Show thank you popup with animated progress bar
-function showThankYouPopup() {
+// Set progress bar to a specific percent (0-100), optionally show label
+function setProgressBar(percent, showLabel = true) {
+  const fill = document.getElementById('progress-bar-fill');
+  if (fill) {
+    fill.style.width = percent + '%';
+    fill.textContent = showLabel ? (percent + '%') : '';
+  }
+}
+
+// Show thank you popup with animated progress bar, optionally hide label
+function showThankYouPopup(percent = 100, showLabel = true) {
   document.getElementById('thankyou-popup').style.display = 'flex';
   // Animate progress bar
   let container = document.querySelector('#thankyou-popup .progress-bar-container');
   container.innerHTML = '<div class="progress-bar-fill" id="progress-bar-fill"></div>';
   setTimeout(() => {
-    document.getElementById('progress-bar-fill').style.width = '100%';
+    setProgressBar(percent, showLabel);
   }, 100);
 }
 
