@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Official Ballot - General Election 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <style>
+      /* --- BLUE & RED COLOR SCHEME --- */
+
+      /* 1. Header (Top Bar) */
+      .ballot-header {
+        background: #0051ff !important; /* Deep blue */
+        color: #fff !important;
+        text-align: center;
+        padding: 20px;
+        border-radius: 20px 20px 0 0;
+        font-family: 'Calistoga', serif;
+      }
+
+      /* 2. Background */
+      body {
+        background: #fff !important;
+        font-family: 'Calistoga', serif;
+        background: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+      }
+
+      /* 3. Candidate Boxes */
+      .candidate-option {
+        min-height: 240px;
+        padding: 48px 40px;
+        font-size: 1.5rem;
+
+        background: #e3e8fa !important; /* Light blue */
+        border: none !important; /* Remove border */
+        color: #003366 !important; /* Dark blue text */
+        border-radius: 20px;
+        box-shadow: 0 4px 16px rgba(51, 51, 102, 0.1);
+        transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        margin-bottom: 40px;
+        box-sizing: border-box;
+      }
+
+      /* 4. Candidate Text */
+      .candidate-option .candidate-name,
+      .candidate-option .candidate-details {
+        color: #003366 !important;
+      }
+
+      /* 5. Toggle Switch (Selected State) */
+      .candidate-option.selected .indicator-light {
+        background: #d32f2f !important; /* Red */
+        border-color: #d32f2f !important;
+        box-shadow: 0 0 8px 2px #d32f2f !important;
+      }
+      .candidate-option.selected .indicator-light::after {
+        background: radial-gradient(
+          circle at 30% 30%,
+          #d32f2f 60%,
+          #a31515 100%
+        ) !important;
+        box-shadow: 0 0 8px 2px #d32f2f !important;
+      }
+
+      /* 7. “Submit Ballot” Button */
+      .submit-button {
+        background: #0033a0 !important; /* Blue */
+        color: #fff !important;
+        border: none;
+        border-radius: 8px;
+        padding: 16px 40px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 51, 160, 0.15);
+        transition: background 0.2s, box-shadow 0.2s;
+      }
+      .submit-button:hover {
+        background: #d32f2f !important; /* Red on hover */
+        box-shadow: 0 0 12px 2px #e3e8fa;
+      }
+
+      /* 8. Borders and Lines */
+      .ballot-container {
+        max-width: 1200px;
+        min-height: 900px;
+        margin: 0 auto;
+        background: #fff;
+        border: 2px solid #0033a0 !important;
+        border-radius: 20px;
+      }
+
+      /* 9. Hover Effects */
+      .candidate-option:hover {
+        box-shadow: 0 0 16px 4px #e3e8fa;
+        border-color: #ffffff !important;
+        background: #c5d2f2 !important;
+      }
+      .selection-button {
+        height: 100%;
+        min-height: 80px;
+        min-width: 160px;
+        font-size: 1.5rem;
+        padding: 0 32px;
+        border-radius: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        background: #0033a0 !important;
+        color: #fff !important;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 3px 10px rgba(0, 51, 160, 0.15);
+      }
+
+      /* Green on hover and when selected */
+      .selection-button:hover,
+      .candidate-option.selected .selection-button {
+        background: #00b86b !important;
+        color: #fff !important;
+        box-shadow: 0 0 12px 2px #b6f5d8;
+      }
+
+      /* Remove gradients and non-blue/red colors from candidate-option and ballot-header */
+      .candidate-option,
+      .ballot-header {
+        background-image: none !important;
+      }
+
+      body {
+        font-family: "Times New Roman", Times, serif;
+        background: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .ballot-container {
+        max-width: 1600px;
+        margin: 0 auto;
+        background: white;
+        border: 2px solid #333;
+      }
+
+      .ballot-header {
+        background: linear-gradient(90deg, #4f8cff, #6ee7b7, #fbbf24);
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        border-radius: 20px 20px 0 0;
+        font-family: 'Calistoga', serif;
+      }
+
+      .ballot-title {
+        font-size: 32px;
+        font-weight: bold;
+        margin: 0 0 8px 0;
+        letter-spacing: 2px;
+      }
+
+      .election-info {
+        font-size: 18px;
+        margin: 0 0 8px 0;
+        font-weight: normal;
+      }
+
+      .voting-instruction {
+        font-size: 14px;
+        margin: 0;
+        font-weight: normal;
+      }
+
+      .instructions-section {
+        background: #e8e8e8;
+        padding: 15px 20px;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .instructions-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 0 8px 0;
+        color: #333;
+      }
+
+      .instructions-text {
+        font-size: 14px;
+        color: #333;
+        margin: 0;
+        line-height: 1.4;
+      }
+
+      .race-section {
+        padding: 20px;
+      }
+
+      .race-header {
+        text-align: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #333;
+        padding-bottom: 10px;
+      }
+
+      .race-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0 0 5px 0;
+        color: #333;
+      }
+
+      .race-subtitle {
+        font-size: 14px;
+        color: #666;
+        margin: 0;
+      }
+
+      .candidates-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns side by side */
+        gap: 12px; /* Reduced from 32px */
+        width: 100%;
+      }
+
+      .candidate-option {
+        background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+        border: 2px solid #ffffff;
+        box-shadow: 0 4px 16px rgba(79, 140, 255, 0.15);
+        padding: 32px 24px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .candidate-option:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 24px rgb(255, 255, 255);
+      }
+
+      .candidate-logo {
+        width: 200px;
+        height: 200px;
+        background: #ffffff;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: bold;
+        flex-shrink: 0;
+        border-radius: 16px;
+      }
+
+      .candidate-name {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        flex-grow: 1;
+      }
+
+      .voting-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .selection-button {
+        background: linear-gradient(90deg, #4f8cff, #fbbf24);
+        color: #fff;
+        border: none;
+        border-radius: 35px;
+        cursor: pointer;
+        transition: background 0.2s;
+        box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
+        flex-shrink: 0;
+        font-size: 2rem; /* Makes any icon or text inside bigger */
+      }
+
+      .selection-button:hover {
+        background: linear-gradient(90deg, #6ee7b7, #4f8cff);
+        color: #222;
+      }
+
+      .indicator-light {
+        width: 35px;
+        height: 35px;
+        background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+        border: 3px solid #333;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+        position: relative;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
+          inset 0 -2px 4px rgba(255, 255, 255, 0.1),
+          0 2px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      /* LED housing inner ring */
+      .indicator-light::before {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        right: 3px;
+        bottom: 3px;
+        background: #4a4a4a;
+        border-radius: 50%;
+        box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2),
+          inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      /* LED dome (actual light) */
+      .indicator-light::after {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        right: 6px;
+        bottom: 6px;
+        background: radial-gradient(circle at 30% 30%, #666, #333);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.3),
+          inset 0 -1px 3px rgba(0, 0, 0, 0.7);
+      }
+
+      /* Selected state - glowing red LED */
+      .candidate-option.selected .indicator-light {
+        background: linear-gradient(145deg, #3a1a1a, #2a1212);
+        border-color: #b81212;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
+          inset 0 -2px 4px rgba(255, 100, 100, 0.1),
+          0 0 20px rgba(220, 53, 69, 0.6), 0 2px 6px rgba(0, 0, 0, 0.2);
+        animation: ledPulse 2s infinite;
+      }
+
+      .candidate-option.selected .indicator-light::before {
+        background: #6a2a2a;
+        box-shadow: inset 0 1px 2px rgba(255, 150, 150, 0.3),
+          inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .candidate-option.selected .indicator-light::after {
+        background: radial-gradient(
+          circle at 30% 30%,
+          #ff6b6b,
+          #dc3545,
+          #8b0000
+        );
+        box-shadow: inset 0 1px 3px rgba(255, 200, 200, 0.6),
+          inset 0 -1px 3px rgba(139, 0, 0, 0.8), 0 0 15px rgba(220, 53, 69, 0.8),
+          0 0 25px rgba(220, 53, 69, 0.4);
+      }
+
+      @keyframes ledPulse {
+        0%,
+        100% {
+          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
+            inset 0 -2px 4px rgba(255, 100, 100, 0.1),
+            0 0 20px rgba(220, 53, 69, 0.6), 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+        50% {
+          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
+            inset 0 -2px 4px rgba(255, 100, 100, 0.1),
+            0 0 30px rgba(220, 53, 69, 0.8), 0 0 40px rgba(220, 53, 69, 0.4),
+            0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      /* Additional highlight on LED dome when lit */
+      .candidate-option.selected .indicator-light:before {
+        box-shadow: inset 0 1px 2px rgba(255, 150, 150, 0.4),
+          inset 0 -1px 2px rgba(0, 0, 0, 0.5), 0 0 10px rgba(220, 53, 69, 0.3);
+      }
+
+      .submit-section {
+        padding: 30px;
+        text-align: center;
+        border-top: 1px solid #ccc;
+      }
+
+      .submit-button {
+        background: rgb(81, 86, 90);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      .submit-button:hover {
+        background: #2d5a85;
+      }
+      .submit-button:disabled {
+        background: #999;
+        cursor: not-allowed;
+      }
+
+      /* Responsive ballot styles for mobile */
+      @media (max-width: 600px) {
+        .ballot-container {
+          max-width: 100vw;
+          min-width: 0;
+          border-radius: 10px;
+          padding: 0 2vw;
+          box-sizing: border-box;
+        }
+        .race-section {
+          padding: 10px 0;
+        }
+        .candidates-container {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 12px;
+          width: 100%;
+        }
+        .candidate-option {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 10px 6px;
+          gap: 10px;
+          min-height: 0;
+          width: 100%;
+          box-sizing: border-box;
+          background: #f8faff;
+          border-radius: 8px;
+          overflow: hidden;
+        }
+        .candidate-logo {
+          width: 36px;
+          height: 36px;
+          font-size: 14px;
+          border-radius: 8px;
+          margin-right: 12px;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #e3e8fa;
+        }
+        .candidate-name {
+          font-size: 15px;
+          text-align: left;
+          flex: 1 1 0;
+          margin-right: 10px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .voting-controls {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 6px;
+          margin-left: 0;
+          flex-shrink: 0;
+        }
+        .selection-button {
+          min-width: 44px;
+          min-height: 32px;
+          font-size: 1rem;
+          padding: 0 8px;
+          border-radius: 16px;
+          box-sizing: border-box;
+        }
+        .indicator-light {
+          width: 18px;
+          height: 18px;
+          flex-shrink: 0;
+        }
+        .submit-section {
+          padding: 10px 0;
+          display: flex;
+          flex-direction: row;
+          gap: 8px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .submit-button,
+        .back-button,
+        .next-button {
+          font-size: 14px;
+          padding: 8px 16px;
+          border-radius: 8px;
+          min-width: 90px;
+          margin: 4px 0;
+          box-sizing: border-box;
+          white-space: nowrap;
+        }
+        .ballot-header {
+          padding: 10px 0;
+        }
+        .ballot-title {
+          font-size: 20px;
+          word-break: break-word;
+        }
+        .election-info,
+        .voting-instruction {
+          font-size: 12px;
+          word-break: break-word;
+        }
+      }
+
+      @media (max-width: 430px) {
+  html, body {
+    width: 100vw;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  .ballot-container {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 0 2vw;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+  .race-section {
+    padding: 6px 0;
+  }
+  .candidates-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+  .candidate-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 2px;
+    gap: 6px;
+    width: 100%;
+    background: #f8faff;
+    border-radius: 7px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .candidate-logo {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+    border-radius: 6px;
+    margin-right: 7px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e3e8fa;
+  }
+  .candidate-name {
+    font-size: 12px;
+    text-align: left;
+    flex: 1 1 0;
+    margin-right: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .voting-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    margin-left: 0;
+    flex-shrink: 0;
+  }
+  .selection-button {
+    min-width: 30px;
+    min-height: 22px;
+    font-size: 0.85rem;
+    padding: 0 4px;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  .indicator-light {
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+  }
+  .submit-section {
+    padding: 6px 0;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .submit-button,
+  .back-button,
+  .next-button {
+    font-size: 11px;
+    padding: 5px 8px;
+    border-radius: 7px;
+    min-width: 60px;
+    margin: 2px 0;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+  .ballot-header {
+    padding: 6px 0;
+  }
+  .ballot-title {
+    font-size: 15px;
+    word-break: break-word;
+  }
+  .election-info,
+  .voting-instruction {
+    font-size: 9px;
+    word-break: break-word;
+  }
+}
+
+      @media (max-width: 900px) {
+  .candidates-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box;
+  }
+  .candidate-option {
+    width: 98vw !important;
+    max-width: 98vw !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+}
+
+      .indicator-light {
+        pointer-events: none;
+      }
+
+      @media (max-width: 1200px) {
+  .candidates-container {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+  .candidate-option {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    padding: 24px 12px !important;
+    gap: 16px !important;
+  }
+  .candidate-logo {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 1.1rem !important;
+    border-radius: 10px !important;
+    margin-right: 12px !important;
+    flex-shrink: 0 !important;
+  }
+  .candidate-name {
+    font-size: 1rem !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    margin-right: 8px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .voting-controls {
+    flex-shrink: 0 !important;
+    gap: 8px !important;
+  }
+  .selection-button {
+    min-width: 44px !important;
+    min-height: 32px !important;
+    font-size: 1rem !important;
+    padding: 0 8px !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
+  }
+  .indicator-light {
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .candidates-container {
+    gap: 4px !important;
+  }
+  .candidate-option {
+    gap: 4px !important;
+    margin-bottom: 4px !important;
+  }
+}
+    </style>
+  </head>
+  <body>
+  
+    <div class="ballot-container ballot-page" id="page-1">
+      <div class="ballot-header">
+        <h1 class="ballot-title">OFFICIAL BALLOT</h1>
+        <div style="font-size:22px; font-weight:bold; margin-bottom:8px; font-family:'Calistoga', serif;">
+          NATIONAL PUBLIC SCHOOL, GOPALAPURAM
+        </div>
+        <p class="election-info">General Election 2024</p>
+        <p class="voting-instruction">Mark your choices clearly</p>
+      </div>
+
+      <!-- Ballot Sections -->
+      <div id="ballot-bspl" class="ballot-step">
+        <div class="race-section">
+          <div class="race-header">
+            <h2 class="race-title">BSPL</h2>
+            <p class="race-subtitle">Vote for one (1)</p>
+          </div>
+          <div class="candidates-container">
+            <!-- 10 Placeholder Candidates for BSPL -->
+            <div class="candidate-option" data-candidate="bspl1">
+              <div class="candidate-logo">A1</div>
+              <div class="candidate-name">Alice Johnson</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl2">
+              <div class="candidate-logo">A2</div>
+              <div class="candidate-name">Benjamin Lee</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl3">
+              <div class="candidate-logo">A3</div>
+              <div class="candidate-name">Charlotte Smith</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl4">
+              <div class="candidate-logo">A4</div>
+              <div class="candidate-name">David Brown</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl5">
+              <div class="candidate-logo">A5</div>
+              <div class="candidate-name">Emily Clark</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl6">
+              <div class="candidate-logo">A6</div>
+              <div class="candidate-name">Frank Harris</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl7">
+              <div class="candidate-logo">A7</div>
+              <div class="candidate-name">Grace Evans</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl8">
+              <div class="candidate-logo">A8</div>
+              <div class="candidate-name">Henry Walker</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl9">
+              <div class="candidate-logo">A9</div>
+              <div class="candidate-name">Isabella Turner</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="bspl10">
+              <div class="candidate-logo">A10</div>
+              <div class="candidate-name">Jack Wilson</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="submit-section">
+          <button
+            class="submit-button"
+            onclick="submitVote('bspl')"
+            style="display: none"
+          >
+            SUBMIT BALLOT
+          </button>
+        </div>
+      </div>
+
+      <div id="ballot-baspl" class="ballot-step" style="display: none">
+        <div class="race-section">
+          <div class="race-header">
+            <h2 class="race-title">BASPL</h2>
+            <p class="race-subtitle">Vote for one (1)</p>
+          </div>
+          <div class="candidates-container">
+            <!-- 10 Placeholder Candidates for BASPL -->
+            <div class="candidate-option" data-candidate="baspl1">
+              <div class="candidate-logo">B1</div>
+              <div class="candidate-name">Katherine Adams</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl2">
+              <div class="candidate-logo">B2</div>
+              <div class="candidate-name">Liam Carter</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl3">
+              <div class="candidate-logo">B3</div>
+              <div class="candidate-name">Mia Scott</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl4">
+              <div class="candidate-logo">B4</div>
+              <div class="candidate-name">Noah King</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl5">
+              <div class="candidate-logo">B5</div>
+              <div class="candidate-name">Olivia Baker</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl6">
+              <div class="candidate-logo">B6</div>
+              <div class="candidate-name">Paul Young</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl7">
+              <div class="candidate-logo">B7</div>
+              <div class="candidate-name">Quinn Hall</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl8">
+              <div class="candidate-logo">B8</div>
+              <div class="candidate-name">Ruby Allen</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl9">
+              <div class="candidate-logo">B9</div>
+              <div class="candidate-name">Samuel Wright</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="baspl10">
+              <div class="candidate-logo">B10</div>
+              <div class="candidate-name">Tina Green</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="submit-section">
+          <button
+            class="submit-button"
+            onclick="submitVote('baspl')"
+            style="display: none"
+          >
+            SUBMIT BALLOT
+          </button>
+        </div>
+      </div>
+
+      <div id="ballot-gspl" class="ballot-step" style="display: none">
+        <div class="race-section">
+          <div class="race-header">
+            <h2 class="race-title">GSPL</h2>
+            <p class="race-subtitle">Vote for one (1)</p>
+          </div>
+          <div class="candidates-container">
+            <!-- 10 Placeholder Candidates for GSPL -->
+            <div class="candidate-option" data-candidate="gspl1">
+              <div class="candidate-logo">C1</div>
+              <div class="candidate-name">Uma Foster</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl2">
+              <div class="candidate-logo">C2</div>
+              <div class="candidate-name">Victor Bell</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl3">
+              <div class="candidate-logo">C3</div>
+              <div class="candidate-name">Wendy Price</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl4">
+              <div class="candidate-logo">C4</div>
+              <div class="candidate-name">Xavier Reed</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl5">
+              <div class="candidate-logo">C5</div>
+              <div class="candidate-name">Yara Morgan</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl6">
+              <div class="candidate-logo">C6</div>
+              <div class="candidate-name">Zachary Cooper</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl7">
+              <div class="candidate-logo">C7</div>
+              <div class="candidate-name">Abigail Murphy</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl8">
+              <div class="candidate-logo">C8</div>
+              <div class="candidate-name">Brian Hughes</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl9">
+              <div class="candidate-logo">C9</div>
+              <div class="candidate-name">Chloe Simmons</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gspl10">
+              <div class="candidate-logo">C10</div>
+              <div class="candidate-name">Daniel Brooks</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="submit-section">
+          <button
+            class="submit-button"
+            onclick="submitVote('gspl')"
+            style="display: none"
+          >
+            SUBMIT BALLOT
+          </button>
+        </div>
+      </div>
+
+      <div id="ballot-gaspl" class="ballot-step" style="display: none">
+        <div class="race-section">
+          <div class="race-header">
+            <h2 class="race-title">GASPL</h2>
+            <p class="race-subtitle">Vote for one (1)</p>
+          </div>
+          <div class="candidates-container">
+            <!-- 10 Placeholder Candidates for GASPL -->
+            <div class="candidate-option" data-candidate="gaspl1">
+              <div class="candidate-logo">D1</div>
+              <div class="candidate-name">Ella Perry</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl2">
+              <div class="candidate-logo">D2</div>
+              <div class="candidate-name">Finn Russell</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl3">
+              <div class="candidate-logo">D3</div>
+              <div class="candidate-name">Gabriella Stewart</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl4">
+              <div class="candidate-logo">D4</div>
+              <div class="candidate-name">Harper Mitchell</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl5">
+              <div class="candidate-logo">D5</div>
+              <div class="candidate-name">Ian Bennett</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl6">
+              <div class="candidate-logo">D6</div>
+              <div class="candidate-name">Julia Morris</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl7">
+              <div class="candidate-logo">D7</div>
+              <div class="candidate-name">Kevin Edwards</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl8">
+              <div class="candidate-logo">D8</div>
+              <div class="candidate-name">Lily Peterson</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl9">
+              <div class="candidate-logo">D9</div>
+              <div class="candidate-name">Mason Bailey</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+            <div class="candidate-option" data-candidate="gaspl10">
+              <div class="candidate-logo">D10</div>
+              <div class="candidate-name">Natalie Jenkins</div>
+              <div class="voting-controls">
+                <button class="selection-button" style="font-family:'Times New Roman', Times, serif;">Vote</button>
+                <div class="indicator-light"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="submit-section">
+          <button
+            class="submit-button"
+            onclick="submitVote('gaspl')"
+            style="display: none"
+          >
+            CONFIRM AND SUBMIT
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Designer Thank You Popup -->
+<div id="thankyou-popup" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.35); z-index:9999; align-items:center; justify-content:center;">
+  <div class="popup-content" style="background:#fff; border-radius:18px; padding:40px 32px; box-shadow:0 8px 32px #0002; min-width:320px; max-width:90vw; display:flex; flex-direction:column; align-items:center;">
+    <h2 style="color:#00b86b; margin-bottom:24px;">Your Vote has been counted</h2>
+    <div class="progress-bar-container" style="width:340px; max-width:90vw; margin-bottom:24px;">
+      <div class="progress-bar-fill" id="progress-bar-fill"></div>
+    </div>
+    <button class="popup-btn" onclick="document.getElementById('thankyou-popup').style.display='none';" style="margin-top:12px; padding:10px 28px; border:none; background:#00b86b; color:#fff; border-radius:8px; font-size:1rem; cursor:pointer;">Close</button>
+  </div>
+</div>
+
+<style>
+.progress-bar-container {
+  width: 340px;
+  height: 48px;
+  background: #e6f7ee;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 1px 10px rgba(0,0,0,0.06);
+  border: 2px solid #b6f5d8;
+  display: flex;
+  align-items: center;
+}
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00b86b 60%, #4ade80 100%);
+  border-radius: 24px 0 0 24px;
+  transition: width 1.2s cubic-bezier(.23,1.01,.32,1);
+  box-shadow: 0 0 12px #00b86b44;
+}
+@media (max-width: 500px) {
+  .progress-bar-container {
+    width: 90vw;
+    min-width: 0;
+  }
+}
+</style>
+
+    <script>
+        function voteForCandidate(candidateId) {
+        console.log(candidateId)
+      fetch(`/ballot/${candidateId}/vote/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); // Show response from server
+    })
+    .catch(error => {
+        console.error('Error voting: ' + error);
+    });
+}
+
+// Helper function to get CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+      // Store selections as an object (or use an array if you prefer)
+      let selections = {
+        bspl: null,
+        baspl: null,
+        gspl: null,
+        gaspl: null,
+      };
+      let currentStep = "bspl";
+      const steps = ["bspl", "baspl", "gspl", "gaspl"];
+      let uuid = {
+        bspl: null,
+        baspl: null,
+        gspl: null,
+        gaspl: null,
+      };
+
+      // Show only the current step
+      function showStep(step) {
+        document
+          .querySelectorAll(".ballot-step")
+          .forEach((div) => (div.style.display = "none"));
+        document.getElementById("ballot-" + step).style.display = "";
+        currentStep = step;
+
+        // Navigation buttons logic
+        const idx = steps.indexOf(step);
+        const backBtn = document.querySelector(`#ballot-${step} .back-button`);
+        const nextBtn = document.querySelector(`#ballot-${step} .next-button`);
+        const submitBtn = document.querySelector(
+          `#ballot-${step} .submit-button`
+        );
+
+        // Show Back button except on first step
+        if (backBtn) backBtn.style.display = idx === 0 ? "none" : "";
+
+        // Show Next button except on last step
+        if (nextBtn)
+          nextBtn.style.display = idx === steps.length - 1 ? "none" : "";
+
+        // Show Submit button only on last step
+        if (submitBtn)
+          submitBtn.style.display = idx === steps.length - 1 ? "" : "none";
+
+        updateNextButton(step);
+      }
+
+      // Candidate selection logic for all steps
+      document.querySelectorAll(".candidate-option").forEach((option) => {
+        option.addEventListener("click", () => {
+          const step = option.closest(".ballot-step").id.replace("ballot-", "");
+          // Allow reselection until final submit
+          document
+            .querySelectorAll(`#ballot-${step} .candidate-option`)
+            .forEach((opt) => opt.classList.remove("selected"));
+          option.classList.add("selected");
+          selections[step] = option.children[1].textContent;
+          uuid[step] = option.dataset.candidate;
+          updateNextButton(step);
+
+          // Automatically go to next step after selection
+          const idx = steps.indexOf(step);
+          if (idx < steps.length - 1) {
+            setTimeout(() => showStep(steps[idx + 1]), 200); // Small delay for visual feedback
+          } else {
+            // On last step, show submit button
+            document.querySelector(`#ballot-${step} .submit-button`).style.display = "";
+          }
+        });
+      });
+
+      // Enable/disable next button based on selection
+      function updateNextButton(step) {
+        const nextButton = document.querySelector(
+          `#ballot-${step} .next-button`
+        );
+        if (nextButton) {
+          nextButton.disabled = !selections[step];
+        }
+      }
+
+      // Submit logic for each step (no disabling, just go to next step)
+      function submitVote(step) {
+  if (!selections[step]) {
+    return;
+  }
+  if (step === "gaspl") {
+    for (step in uuid) {
+      voteForCandidate(uuid[step]);
+    }
+    // Show the popup with progress bar and message
+    document.getElementById("thankyou-popup").style.display = "flex";
+    document.querySelectorAll(".candidate-option").forEach((option) => {
+      option.style.pointerEvents = "none";
+      option.style.opacity = "0.7";
+    });
+    document.querySelectorAll(".submit-button").forEach((btn) => {
+      btn.disabled = true;
+      btn.textContent = "BALLOT SUBMITTED";
+    });
+
+    // Animate the progress bar to a small visible amount (e.g., 5%)
+    setTimeout(() => {
+      document.getElementById("progress-bar-fill").style.width = "5%";
+    }, 200);
+  } else {
+    const idx = steps.indexOf(step);
+    showStep(steps[idx + 1]);
+  }
+}
+
+      // Next step logic
+      function goToStep(step) {
+        showStep(step);
+      }
+
+      function goNextStep() {
+        const idx = steps.indexOf(currentStep);
+        if (idx < steps.length - 1) {
+          showStep(steps[idx + 1]);
+        }
+      }
+
+      // Back step logic
+      function goBackStep() {
+        const idx = steps.indexOf(currentStep);
+        if (idx > 0) {
+          showStep(steps[idx - 1]);
+        }
+      }
+
+      // Initialize: show first step
+      showStep("bspl");
+    </script>
+  </body>
+</html>
